@@ -67,7 +67,7 @@ export default function CreateUser() {
                 )
               }
               <Col className="padding-2">
-                <Typography.Title className="no-margin font-size-18 d-flex justify-content-center">Ingreso de usuarios</Typography.Title>
+                <Typography.Title className="no-margin font-size-18 d-flex justify-content-center">Crear una cuenta de usuario</Typography.Title>
               </Col>
               <Col className="padding-2">
                 <Input

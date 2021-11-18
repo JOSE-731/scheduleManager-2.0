@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Row, Col, Input, Typography, Button, Form } from "antd";
 import { UserOutlined, UnlockOutlined } from "@ant-design/icons";
-import {auth, db} from '../../firebase';
+import { auth, db } from '../../firebase';
 
 
 
@@ -10,7 +10,7 @@ export default function Login() {
   const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
   const [error, setError] = React.useState(null);
-  const [esRegistro, setRegistro] = React.useState(true);
+  const [esRegistro, setRegistro] = React.useState(false);
 
   const procesarDatos = e => {
     e.preventDefault()
@@ -29,16 +29,30 @@ export default function Login() {
     }
 
     if(esRegistro){
-      registrar();
+     registrar();
+    }else{
+      LoginUser();
     }
 
   }
+
+  const LoginUser = React.useCallback(async () => {
+    try {
+      
+      const rest = await auth.signInWithEmailAndPassword(email, password)
+      console.log(rest);
+
+    } catch (error) {
+      
+      console.log(error)
+    }
+  }, [email, password])
 
   const registrar = React.useCallback(async () => {
 
     try{
      const res = await auth.createUserWithEmailAndPassword(email, password)
-     console.log(res);
+     console.log(res.user);
 
      await db.collection('usuarios').doc(res.user.email).set({
        email: res.user.email,
@@ -53,6 +67,7 @@ export default function Login() {
     }
 
   }, [email, password])
+
   return (
     <React.Fragment>
       <div className="d-flex justify-content-center align-center" style={{ height: '100%' }}>
