@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Row, Col, Input, Typography, Button, Form } from "antd";
 import { UserOutlined, UnlockOutlined } from "@ant-design/icons";
-import {auth} from '../../firebase';
+import {auth, db} from '../../firebase';
 
 
 
@@ -39,6 +39,15 @@ export default function CreateUser() {
     try{
      const res = await auth.createUserWithEmailAndPassword(email, password)
      console.log(res);
+
+     await db.collection('usuarios').doc(res.user.email).set({
+       email: res.user.email,
+       uid: res.user.uid
+     })
+
+     setEmail('')
+     setPassword('')
+
     }catch (error){
       console.log(error)
     }
@@ -58,7 +67,7 @@ export default function CreateUser() {
                 )
               }
               <Col className="padding-2">
-                <Typography.Title className="no-margin font-size-18 d-flex justify-content-center">Crear usuarios</Typography.Title>
+                <Typography.Title className="no-margin font-size-18 d-flex justify-content-center">Ingreso de usuarios</Typography.Title>
               </Col>
               <Col className="padding-2">
                 <Input
