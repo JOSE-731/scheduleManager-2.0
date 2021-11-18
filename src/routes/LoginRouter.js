@@ -10,6 +10,7 @@ import ChangePassword from "../screens/Login/ChangePassword";
 import AdminRouter from "./AdminRouter";
 // ANT-DESIGN
 import { Layout } from "antd";
+import CreateUser from "../screens/Login/CreateUser";
 
 export default function LoginRouter() {
   return (
@@ -19,6 +20,9 @@ export default function LoginRouter() {
           <Switch>
             <Route path="/Administrador/">
               <AdminRouter />
+            </Route>
+            <Route path="/Createuser/">
+              <CreateUser/>
             </Route>
             <Route path="/Olvidastecontraseña">
               <ValidarUser />
