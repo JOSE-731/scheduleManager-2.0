@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Row, Col, Input, Typography, Button, Form } from "antd";
 import { UserOutlined, UnlockOutlined } from "@ant-design/icons";
-import {auth, db} from '../../firebase';
+import { auth, db } from '../../firebase';
 
 
 
@@ -28,7 +28,7 @@ export default function CreateUser() {
       setError('Ingrese una contraseña de 6 caracteres como minimo');
     }
 
-    if(esRegistro){
+    if (esRegistro) {
       registrar();
     }
 
@@ -36,19 +36,19 @@ export default function CreateUser() {
 
   const registrar = React.useCallback(async () => {
 
-    try{
-     const res = await auth.createUserWithEmailAndPassword(email, password)
-     console.log(res);
+    try {
+      const res = await auth.createUserWithEmailAndPassword(email, password)
+      console.log(res);
 
-     await db.collection('usuarios').doc(res.user.email).set({
-       email: res.user.email,
-       uid: res.user.uid
-     })
+      await db.collection('usuarios').doc(res.user.email).set({
+        email: res.user.email,
+        uid: res.user.uid
+      })
 
-     setEmail('')
-     setPassword('')
+      setEmail('')
+      setPassword('')
 
-    }catch (error){
+    } catch (error) {
       console.log(error)
     }
 

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Row, Col, Input, Typography, Button, Form } from "antd";
 import { UserOutlined, UnlockOutlined } from "@ant-design/icons";
 import { auth, db } from '../../firebase';
+//Redirigir
 import { withRouter } from "react-router-dom";
 
 
