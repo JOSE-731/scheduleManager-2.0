@@ -2,10 +2,11 @@ import React, { useState } from "react";
 import { Row, Col, Input, Typography, Button, Form } from "antd";
 import { UserOutlined, UnlockOutlined } from "@ant-design/icons";
 import { auth, db } from '../../firebase';
+import { withRouter } from "react-router-dom";
 
 
 
-export default function Login() {
+const Login = (props) => {
   //State para iniciar sesión
   const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
@@ -40,7 +41,12 @@ export default function Login() {
     try {
       
       const rest = await auth.signInWithEmailAndPassword(email, password)
+      setEmail('');
+      setPassword('');
       console.log(rest);
+
+      //Redirigir
+      props.history.push('/Administrador/')
 
     } catch (error) {
       
@@ -66,7 +72,7 @@ export default function Login() {
       console.log(error)
     }
 
-  }, [email, password])
+  }, [email, password, props.history])
 
   return (
     <React.Fragment>
@@ -118,3 +124,5 @@ export default function Login() {
     </React.Fragment>
   );
 }
+
+export default withRouter(Login)
