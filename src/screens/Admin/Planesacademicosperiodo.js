@@ -1,6 +1,7 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
 // CSS
 import { Row, Col, Table, Input, Select, Typography, Button } from "antd";
+import axios from "axios";
 
 const columnas = [
   {
@@ -48,9 +49,34 @@ const dataS = [
 ];
 
 export default function PlaneacionAcademica() {
+
+  useEffect(() =>{
+
+    const consultarAPI = async () =>{
+      const  tipoInstitucion = 'https://app-gestion-aunar.herokuapp.com/tipo-institucion';
+     
+      const resultado1 = await axios.get(tipoInstitucion);
+      console.log(resultado1);
+
+    }
+
+    const consultarAPI2 = async () =>{
+      const facultades = 'https://app-gestion-aunar.herokuapp.com/facultades';
+      const resultado2 = await axios.get(facultades);
+     
+      console.log(resultado2);
+    }
+    consultarAPI();
+    consultarAPI2();
+
+  }, []);
+
   const guardarPlanacademico = () => {
     console.log('guardando plan academico');
   };
+
+
+
   return (
     <React.Fragment>
       <div className="d-flex justify-content-center align-center flex-direction-columm" style={{ height: "100%" }}>

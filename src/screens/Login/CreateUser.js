@@ -91,10 +91,7 @@ export default function CreateUser() {
                 />
               </Col>
               <Col className="padding-2 d-flex justify-content-center">
-                <Typography.Text>¿Olvidaste tu contraseña?</Typography.Text>
-              </Col>
-              <Col className="padding-2 d-flex justify-content-center">
-                <input type="submit" className="btn btn-primary mb-5" value="Iniciar Sesión" />
+                <input type="submit" className="btn btn-primary mb-5" value="Guardar" />
               </Col>
             </form>
           </Row>

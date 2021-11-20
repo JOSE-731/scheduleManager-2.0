@@ -29,13 +29,13 @@ const  AdminHome = (props) => {
         <Col>
           <BookOutlined
             className="font-size-100 justify-content-center font-color-FFFFFF"
-            onClick={() => gotoScreen("/Administrador/Planesacademicos")}
+            onClick={() => gotoScreen("/Administrador/VerperiodoPlan")}
             label="Planes académicos"
           />
           <span className="d-flex no-margin justify-content-center font-color-FFFFFF">Planes Académicos</span>
         </Col>
         <Col>
-          <UsergroupAddOutlined className="font-size-100 font-color-FFFFFF" onClick={() => gotoScreen("/Administrador/Usuarios")} />
+          <UsergroupAddOutlined className="font-size-100 font-color-FFFFFF" onClick={() => gotoScreen("/Createuser/")} />
           <span className="d-flex no-margin justify-content-center font-color-FFFFFF">
             Usuarios
           </span>
