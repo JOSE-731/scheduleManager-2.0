@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 // CSS
 import { Row, Col, Table, Input, Select, Typography, Button } from "antd";
 import axios from "axios";
@@ -45,114 +45,143 @@ const dataS = [
     jornada: "Nocturna",
     semestre: "Noveno",
   },
-  
+
 ];
 
 export default function PlaneacionAcademica() {
 
-  useEffect(() =>{
+  //State de la apis que se consumen
+  const [stInstitucion, setInstitucion] = React.useState('');
+  const [stFacultades, setFacultades] = React.useState('');
+  const [stProgramas, setProgramas] = React.useState('');
+  const [stSemestres, setSemestres] = React.useState('');
 
-    const consultarAPI = async () =>{
-      const  tipoInstitucion = 'https://app-gestion-aunar.herokuapp.com/tipo-institucion';
-     
-      const resultado1 = await axios.get(tipoInstitucion);
-      console.log(resultado1);
+  useEffect(() => {
 
-    }
-
-    const consultarAPI2 = async () =>{
-      const facultades = 'https://app-gestion-aunar.herokuapp.com/facultades';
-      const resultado2 = await axios.get(facultades);
-     
-      console.log(resultado2);
-    }
+   
     consultarAPI();
-    consultarAPI2();
+
+    facultadApi();
+    
 
   }, []);
+
+  const facultadApi = async () => {
+
+    const facultades = 'https://app-gestion-aunar.herokuapp.com/facultades';
+    const resFacultades = await axios.get(facultades);
+    setFacultades(resFacultades.data);
+    console.log(stFacultades);
+    
+  }
+
+  
+  const consultarAPI = async () => {
+
+    const tipoInstitucion = 'https://app-gestion-aunar.herokuapp.com/tipo-institucion';
+    const resTipoInstitucion = await axios.get(tipoInstitucion);
+    setInstitucion(resTipoInstitucion.data);
+    console.log(stInstitucion);
+    /*
+         
+    
+          const programas = 'https://app-gestion-aunar.herokuapp.com/programa';
+          const resProgramas = await axios.get(programas);
+          setProgramas(resProgramas);
+          console.log(stProgramas);
+    
+          const semestres = 'https://app-gestion-aunar.herokuapp.com/semestres';
+          const resSemestres = await axios.get(semestres);
+          setSemestres(resSemestres);
+          console.log(stSemestres);
+    */
+
+  }
 
   const guardarPlanacademico = () => {
     console.log('guardando plan academico');
   };
 
 
-
   return (
-    <React.Fragment>
-      <div className="d-flex justify-content-center align-center flex-direction-columm" style={{ height: "100%" }}>
-        <Row className="box-select-content border-radius-10 box-shadow" style={{ padding: "2%" }}>
-          <Row style={{ width: "100%", padding: "2%" }} className="d-flex justify-content-center">
-            <Col>
+    <>
+      <React.Fragment>
+        <div className="d-flex justify-content-center align-center flex-direction-columm" style={{ height: "100%" }}>
+          <Row className="box-select-content border-radius-10 box-shadow" style={{ padding: "2%" }}>
+            <Row style={{ width: "100%", padding: "2%" }} className="d-flex justify-content-center">
+              <Col>
               <span className="titulos">Planes académicos del periodo</span>
-            </Col>
+              </Col>
+            </Row>
+            <Row style={{ width: "100%" }}>
+              <Col span={8} className="select-space">
+                <Input.Group>
+                  <Typography.Text>Tipo institución:</Typography.Text>
+                  <Select className="margin-left" defaultValue="Seleccione" style={{ width: 150 }}>
+                   {stInstitucion.map((data) =>
+                      <Select.Option value={data.idTipoInstitucion} key={data.idTipoInstitucion}>{data.nombreInstitucion}</Select.Option>
+                    )
+                    }
+                  </Select>
+                </Input.Group>
+              </Col>
+              <Col span={8} className="select-space">
+                <Input.Group>
+                  <Typography.Text>Facultad:</Typography.Text>
+                  <Select className="margin-left" defaultValue="Seleccione" style={{ width: 150 }}>
+                    <Select.Option value="jack">Jfack</Select.Option>
+                    <Select.Option value="lucy">Lucy</Select.Option>
+                    <Select.Option value="Yiminghe">yiminghe</Select.Option>
+                  </Select>
+                </Input.Group>
+              </Col>
+              <Col span={8} className="select-space">
+                <Input.Group>
+                  <Typography.Text>Programa:</Typography.Text>
+                  <Select className="margin-left" defaultValue="Seleccione" style={{ width: 150 }}>
+                    <Select.Option value="jack">Jack</Select.Option>
+                    <Select.Option value="lucy">Lucy</Select.Option>
+                    <Select.Option value="Yiminghe">yiminghe</Select.Option>
+                  </Select>
+                </Input.Group>
+              </Col>
+              <Col span={8} className="select-space">
+                <Input.Group>
+                  <Typography.Text>Jornada:</Typography.Text>
+                  <Select className="margin-left" defaultValue="Seleccione" style={{ width: 150 }}>
+                    <Select.Option value="jack">Jack</Select.Option>
+                    <Select.Option value="lucy">Lucy</Select.Option>
+                    <Select.Option value="Yiminghe">yiminghe</Select.Option>
+                  </Select>
+                </Input.Group>
+              </Col>
+              <Col span={8} className="select-space">
+                <Input.Group>
+                  <Typography.Text>Semestre:</Typography.Text>
+                  <Select className="margin-left" defaultValue="Seleccione" style={{ width: 150 }}>
+                    <Select.Option value="jack">Jack</Select.Option>
+                    <Select.Option value="lucy">Lucy</Select.Option>
+                    <Select.Option value="Yiminghe">yiminghe</Select.Option>
+                  </Select>
+                </Input.Group>
+              </Col>
+              <Col span={8} className="padding-2">
+                <Button
+                  type="primary"
+                  shape="round"
+                  className="background-color-002053 border-color-002053"
+                  onClick={guardarPlanacademico}
+                >
+                  Guardar
+                </Button>
+              </Col>
+            </Row>
+            <Row className="box-table">
+              <Table columns={columnas} dataSource={dataS} />
+            </Row>
           </Row>
-          <Row style={{ width: "100%" }}>
-            <Col span={8} className="select-space">
-              <Input.Group>
-                <Typography.Text>Tipo institución:</Typography.Text>
-                <Select className="margin-left" defaultValue="Seleccione" style={{ width: 150 }}>
-                  <Select.Option value="jack">Jack</Select.Option>
-                  <Select.Option value="lucy">Lucy</Select.Option>
-                  <Select.Option value="Yiminghe">yiminghe</Select.Option>
-                </Select>
-              </Input.Group>
-            </Col>
-            <Col span={8} className="select-space">
-              <Input.Group>
-                <Typography.Text>Facultad:</Typography.Text>
-                <Select className="margin-left" defaultValue="Seleccione" style={{ width: 150 }}>
-                  <Select.Option value="jack">Jack</Select.Option>
-                  <Select.Option value="lucy">Lucy</Select.Option>
-                  <Select.Option value="Yiminghe">yiminghe</Select.Option>
-                </Select>
-              </Input.Group>
-            </Col>
-            <Col span={8} className="select-space">
-              <Input.Group>
-                <Typography.Text>Programa:</Typography.Text>
-                <Select className="margin-left" defaultValue="Seleccione" style={{ width: 150 }}>
-                  <Select.Option value="jack">Jack</Select.Option>
-                  <Select.Option value="lucy">Lucy</Select.Option>
-                  <Select.Option value="Yiminghe">yiminghe</Select.Option>
-                </Select>
-              </Input.Group>
-            </Col>
-            <Col span={8} className="select-space">
-              <Input.Group>
-                <Typography.Text>Jornada:</Typography.Text>
-                <Select className="margin-left" defaultValue="Seleccione" style={{ width: 150 }}>
-                  <Select.Option value="jack">Jack</Select.Option>
-                  <Select.Option value="lucy">Lucy</Select.Option>
-                  <Select.Option value="Yiminghe">yiminghe</Select.Option>
-                </Select>
-              </Input.Group>
-            </Col>
-            <Col span={8} className="select-space">
-              <Input.Group>
-                <Typography.Text>Semestre:</Typography.Text>
-                <Select className="margin-left" defaultValue="Seleccione" style={{ width: 150 }}>
-                  <Select.Option value="jack">Jack</Select.Option>
-                  <Select.Option value="lucy">Lucy</Select.Option>
-                  <Select.Option value="Yiminghe">yiminghe</Select.Option>
-                </Select>
-              </Input.Group>
-            </Col>
-            <Col span={8} className="padding-2">
-              <Button
-                type="primary"
-                shape="round"
-                className="background-color-002053 border-color-002053"
-                onClick={guardarPlanacademico}
-              >
-                Guardar
-              </Button>
-            </Col>
-          </Row>
-          <Row className="box-table">
-            <Table columns={columnas} dataSource={dataS} />
-          </Row>
-        </Row>
-      </div>
-    </React.Fragment>
+        </div>
+      </React.Fragment>
+    </>
   );
 }
