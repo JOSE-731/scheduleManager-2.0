@@ -51,17 +51,18 @@ const dataS = [
 export default function PlaneacionAcademica() {
 
   //State de la apis que se consumen
-  const [stInstitucion, setInstitucion] = React.useState(null);
+  const [stInstitucion, setInstitucion] = React.useState('');
   const [stFacultades, setFacultades] = React.useState('');
   const [stProgramas, setProgramas] = React.useState('');
   const [stSemestres, setSemestres] = React.useState('');
 
   useEffect(() => {
 
-   
+
     consultarAPI();
     facultadApi();
-    
+    programaAPI();
+    semestresApi();
 
   }, []);
 
@@ -70,41 +71,40 @@ export default function PlaneacionAcademica() {
     const facultades = 'https://app-gestion-aunar.herokuapp.com/facultades';
     const resFacultades = await axios.get(facultades);
     setFacultades(resFacultades.data);
-    console.log(stFacultades);
-    
+
   }
 
-  
+
   const consultarAPI = async () => {
 
     const tipoInstitucion = 'https://app-gestion-aunar.herokuapp.com/tipo-institucion';
     const resTipoInstitucion = await axios.get(tipoInstitucion);
     setInstitucion(resTipoInstitucion.data);
-  
-    /*
-         
-    
-          const programas = 'https://app-gestion-aunar.herokuapp.com/programa';
-          const resProgramas = await axios.get(programas);
-          setProgramas(resProgramas);
-          console.log(stProgramas);
-    
-          const semestres = 'https://app-gestion-aunar.herokuapp.com/semestres';
-          const resSemestres = await axios.get(semestres);
-          setSemestres(resSemestres);
-          console.log(stSemestres);
-    */
 
   }
+
+  const programaAPI = async () => {
+
+    const programas = 'https://app-gestion-aunar.herokuapp.com/programa';
+    const resProgramas = await axios.get(programas);
+    setProgramas(resProgramas.data);
+    console.log(resProgramas);
+
+  }
+
+  const semestresApi = async () => {
+
+    const semestres = 'https://app-gestion-aunar.herokuapp.com/semestres';
+    const resSemestres = await axios.get(semestres);
+    setSemestres(resSemestres.data);
+    console.log(stSemestres);
+
+  }
+
 
   const guardarPlanacademico = () => {
     console.log('guardando plan academico');
   };
-
-  /*  {stInstitucion.map((data) =>
-                      <Select.Option value={data.idTipoInstitucion} key={data.idTipoInstitucion}>{data.nombreInstitucion}</Select.Option>
-                    )
-                    }*/
 
   return (
     <>
@@ -113,7 +113,7 @@ export default function PlaneacionAcademica() {
           <Row className="box-select-content border-radius-10 box-shadow" style={{ padding: "2%" }}>
             <Row style={{ width: "100%", padding: "2%" }} className="d-flex justify-content-center">
               <Col>
-              <span className="titulos">Planes académicos del periodo</span>
+                <span className="titulos">Planes académicos del periodo</span>
               </Col>
             </Row>
             <Row style={{ width: "100%" }}>
@@ -121,10 +121,10 @@ export default function PlaneacionAcademica() {
                 <Input.Group>
                   <Typography.Text>Tipo institución:</Typography.Text>
                   <Select className="margin-left" defaultValue="Seleccione" style={{ width: 150 }}>
-                  {stInstitucion ? (stInstitucion.map((data) =>
+                    {stInstitucion ? (stInstitucion.map((data) =>
                       <Select.Option value={data.idTipoInstitucion} key={data.idTipoInstitucion}>{data.nombreInstitucion}</Select.Option>
                     )
-                  ) : null}
+                    ) : null}
                   </Select>
                 </Input.Group>
               </Col>
@@ -132,10 +132,10 @@ export default function PlaneacionAcademica() {
                 <Input.Group>
                   <Typography.Text>Facultad:</Typography.Text>
                   <Select className="margin-left" defaultValue="Seleccione" style={{ width: 150 }}>
-                  {stFacultades ? (stFacultades.map((data) =>
+                    {stFacultades ? (stFacultades.map((data) =>
                       <Select.Option value={data.idFacultad} key={data.idFacultad}>{data.nombreFacultad}</Select.Option>
                     )
-                  ) : null}
+                    ) : null}
                   </Select>
                 </Input.Group>
               </Col>
@@ -143,9 +143,10 @@ export default function PlaneacionAcademica() {
                 <Input.Group>
                   <Typography.Text>Programa:</Typography.Text>
                   <Select className="margin-left" defaultValue="Seleccione" style={{ width: 150 }}>
-                    <Select.Option value="jack">Jack</Select.Option>
-                    <Select.Option value="lucy">Lucy</Select.Option>
-                    <Select.Option value="Yiminghe">yiminghe</Select.Option>
+                    {stProgramas ? (stProgramas.map((data) =>
+                      <Select.Option value={data.idPrograma} key={data.idPrograma}>{data.nombrePrograma}</Select.Option>
+                    )
+                    ) : null}
                   </Select>
                 </Input.Group>
               </Col>
@@ -163,9 +164,10 @@ export default function PlaneacionAcademica() {
                 <Input.Group>
                   <Typography.Text>Semestre:</Typography.Text>
                   <Select className="margin-left" defaultValue="Seleccione" style={{ width: 150 }}>
-                    <Select.Option value="jack">Jack</Select.Option>
-                    <Select.Option value="lucy">Lucy</Select.Option>
-                    <Select.Option value="Yiminghe">yiminghe</Select.Option>
+                  {stSemestres ? (stSemestres.map((data) =>
+                      <Select.Option value={data.idSemestre} key={data.idSemestre}>{data.numSemestre}</Select.Option>
+                    )
+                    ) : null}
                   </Select>
                 </Input.Group>
               </Col>
