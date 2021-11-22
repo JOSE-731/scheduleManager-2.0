@@ -51,7 +51,7 @@ const dataS = [
 export default function PlaneacionAcademica() {
 
   //State de la apis que se consumen
-  const [stInstitucion, setInstitucion] = React.useState('');
+  const [stInstitucion, setInstitucion] = React.useState(null);
   const [stFacultades, setFacultades] = React.useState('');
   const [stProgramas, setProgramas] = React.useState('');
   const [stSemestres, setSemestres] = React.useState('');
@@ -60,7 +60,6 @@ export default function PlaneacionAcademica() {
 
    
     consultarAPI();
-
     facultadApi();
     
 
@@ -81,7 +80,7 @@ export default function PlaneacionAcademica() {
     const tipoInstitucion = 'https://app-gestion-aunar.herokuapp.com/tipo-institucion';
     const resTipoInstitucion = await axios.get(tipoInstitucion);
     setInstitucion(resTipoInstitucion.data);
-    console.log(stInstitucion);
+  
     /*
          
     
@@ -102,6 +101,10 @@ export default function PlaneacionAcademica() {
     console.log('guardando plan academico');
   };
 
+  /*  {stInstitucion.map((data) =>
+                      <Select.Option value={data.idTipoInstitucion} key={data.idTipoInstitucion}>{data.nombreInstitucion}</Select.Option>
+                    )
+                    }*/
 
   return (
     <>
@@ -118,10 +121,10 @@ export default function PlaneacionAcademica() {
                 <Input.Group>
                   <Typography.Text>Tipo institución:</Typography.Text>
                   <Select className="margin-left" defaultValue="Seleccione" style={{ width: 150 }}>
-                   {stInstitucion.map((data) =>
+                  {stInstitucion ? (stInstitucion.map((data) =>
                       <Select.Option value={data.idTipoInstitucion} key={data.idTipoInstitucion}>{data.nombreInstitucion}</Select.Option>
                     )
-                    }
+                  ) : null}
                   </Select>
                 </Input.Group>
               </Col>
@@ -129,9 +132,10 @@ export default function PlaneacionAcademica() {
                 <Input.Group>
                   <Typography.Text>Facultad:</Typography.Text>
                   <Select className="margin-left" defaultValue="Seleccione" style={{ width: 150 }}>
-                    <Select.Option value="jack">Jfack</Select.Option>
-                    <Select.Option value="lucy">Lucy</Select.Option>
-                    <Select.Option value="Yiminghe">yiminghe</Select.Option>
+                  {stFacultades ? (stFacultades.map((data) =>
+                      <Select.Option value={data.idFacultad} key={data.idFacultad}>{data.nombreFacultad}</Select.Option>
+                    )
+                  ) : null}
                   </Select>
                 </Input.Group>
               </Col>
