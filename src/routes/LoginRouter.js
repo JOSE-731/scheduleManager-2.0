@@ -8,9 +8,9 @@ import CreatePassword from "../screens/Login/CreatePassword";
 import ChangePassword from "../screens/Login/ChangePassword";
 // ADMIN ROUTER
 import AdminRouter from "./AdminRouter";
+import SubdirectoresRouter from "./SubdirectoresRouter";
 // ANT-DESIGN
 import { Layout } from "antd";
-import CreateUser from "../screens/Login/CreateUser";
 
 export default function LoginRouter() {
   return (
@@ -21,8 +21,8 @@ export default function LoginRouter() {
             <Route path="/Administrador/">
               <AdminRouter />
             </Route>
-            <Route path="/Createuser/">
-              <CreateUser/>
+            <Route path="/Subdirector/">
+              <SubdirectoresRouter />
             </Route>
             <Route path="/Olvidastecontraseña">
               <ValidarUser />
