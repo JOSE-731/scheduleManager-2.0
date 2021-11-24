@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Route, BrowserRouter as Router } from "react-router-dom";
+import axios from "axios";
 // SCREENS
 import SubdirectorHome from "../screens/Subdirectores/SubdirectorHome"
 import SubHomeGestion from "../screens/Subdirectores/SubHomeGestion"
@@ -14,6 +15,7 @@ import RegHome from "../screens/RegControl/RegHome"
 import Navbar from "../components/Navbar";
 
 export default function SubdirectoresRouter() {
+
   return (
     <React.Fragment>
       <Navbar />

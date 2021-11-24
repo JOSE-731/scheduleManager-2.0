@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios"
 // CSS
 import { Row, Col, Input, Typography, Select, Button} from "antd";
 import { SaveOutlined, LeftCircleOutlined } from '@ant-design/icons';
@@ -7,6 +8,24 @@ import { useHistory } from "react-router-dom";
 
 export default function Crearusuarios() {
   const history = useHistory();
+
+   //State de roles
+   const [stRoles, setRoles] = React.useState('');
+
+   useEffect(() => {
+ 
+     rolesApi();
+ 
+   }, []);
+ 
+   const rolesApi = async () => {
+ 
+     const roles= 'https://app-gestion-aunar.herokuapp.com/roles';
+     const resRoles = await axios.get(roles);
+     setRoles(resRoles.data);
+ 
+   }
+   
   const gotoScreen = (screen) => {
     return history.push(screen);
   };
@@ -36,8 +55,10 @@ export default function Crearusuarios() {
               <Input.Group>
                 <Typography.Text>Tipo usuario:</Typography.Text>
                 <Select className="margin-left" defaultValue="Seleccione" style={{ width: 150 }}>
-                  <Select.Option value="jack">nnnnnn</Select.Option>
-                  <Select.Option value="lucy">pppppp</Select.Option>
+                {stRoles ? (stRoles.map((data) =>
+                      <Select.Option value={data.idRol} key={data.idRol}>{data.nombreRol}</Select.Option>
+                    )
+                    ) : null}
                 </Select>
               </Input.Group>
             </Col>
