@@ -1,9 +1,39 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 // CSS
 import { Row, Col, Input, Typography, Select, Button, Checkbox } from "antd";
 import { SaveOutlined, LeftCircleOutlined } from '@ant-design/icons';
 
 export default function Crearprogramas() {
+
+    const [stFacultades, setFacultades] = React.useState('');
+    const [stInstitucion, setInstitucion] = React.useState('');
+
+    useEffect(() => {
+
+
+        consultarAPI();
+        facultadApi();
+
+
+    }, []);
+
+    const consultarAPI = async () => {
+
+        const tipoInstitucion = 'https://app-gestion-aunar.herokuapp.com/tipo-institucion';
+        const resTipoInstitucion = await axios.get(tipoInstitucion);
+        setInstitucion(resTipoInstitucion.data);
+
+    }
+
+    const facultadApi = async () => {
+
+        const facultades = 'https://app-gestion-aunar.herokuapp.com/facultades';
+        const resFacultades = await axios.get(facultades);
+        setFacultades(resFacultades.data);
+
+    }
+
 
     function onChange(checkedValues) {
         console.log('checked = ', checkedValues);
@@ -28,8 +58,10 @@ export default function Crearprogramas() {
                             <Input.Group>
                                 <Typography.Text>Tipo institución:</Typography.Text>
                                 <Select className="margin-left" defaultValue="Seleccione" style={{ width: 150 }}>
-                                    <Select.Option value="jack">nnnnnn</Select.Option>
-                                    <Select.Option value="lucy">pppppp</Select.Option>
+                                    {stInstitucion ? (stInstitucion.map((data) =>
+                                        <Select.Option value={data.idTipoInstitucion} key={data.idTipoInstitucion}>{data.nombreInstitucion}</Select.Option>
+                                    )
+                                    ) : null}
                                 </Select>
                             </Input.Group>
                         </Col>
@@ -37,8 +69,10 @@ export default function Crearprogramas() {
                             <Input.Group>
                                 <Typography.Text>Facultad:</Typography.Text>
                                 <Select className="margin-left" defaultValue="Seleccione" style={{ width: 150 }}>
-                                    <Select.Option value="jack">nnnnnn</Select.Option>
-                                    <Select.Option value="lucy">pppppp</Select.Option>
+                                    {stFacultades ? (stFacultades.map((data) =>
+                                        <Select.Option value={data.idFacultad} key={data.idFacultad}>{data.nombreFacultad}</Select.Option>
+                                    )
+                                    ) : null}
                                 </Select>
                             </Input.Group>
                         </Col>

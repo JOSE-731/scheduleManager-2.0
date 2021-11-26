@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 // CSS
 import { Row, Col, Table, Button, Input, Select, Typography } from "antd";
 import { DeleteOutlined, EyeOutlined, EditOutlined, PlusOutlined, LeftCircleOutlined } from '@ant-design/icons';
@@ -19,6 +20,25 @@ const dataS = [
 
 
 export default function Salones() {
+
+    //State de Salones
+    const [stSalones, setSalones] = React.useState('');
+
+    useEffect(() => {
+
+        salonesApi();
+
+    }, []);
+
+    const salonesApi = async () => {
+
+        const salones = 'https://app-gestion-aunar.herokuapp.com/roles';
+        const resSalones = await axios.get(salones);
+        setSalones(resSalones .data);
+        console.log(stSalones);
+
+    }
+
     // COLUMNAS DE LAS TABLAS
     const columnas = [
         {

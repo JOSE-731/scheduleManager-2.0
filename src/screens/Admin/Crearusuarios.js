@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios"
+import axios from "axios";
 // CSS
 import { Row, Col, Input, Typography, Select, Button} from "antd";
 import { SaveOutlined, LeftCircleOutlined } from '@ant-design/icons';

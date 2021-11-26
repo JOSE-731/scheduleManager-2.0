@@ -1,4 +1,6 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+
 // CSS
 import { Row, Col, Table, Button, Input, Select, Typography } from "antd";
 import { DeleteOutlined, EyeOutlined, EditOutlined, PlusOutlined, LeftCircleOutlined } from '@ant-design/icons';
@@ -21,6 +23,34 @@ const dataS = [
 
 
 export default function Programas() {
+
+    const [stFacultades, setFacultades] = React.useState('');
+    const [stInstitucion, setInstitucion] = React.useState('');
+
+    useEffect(() => {
+
+        facultadApi();
+        consultarAPI();
+
+
+    }, []);
+
+    const facultadApi = async () => {
+
+        const facultades = 'https://app-gestion-aunar.herokuapp.com/facultades';
+        const resFacultades = await axios.get(facultades);
+        setFacultades(resFacultades.data);
+
+    }
+
+    const consultarAPI = async () => {
+
+        const tipoInstitucion = 'https://app-gestion-aunar.herokuapp.com/tipo-institucion';
+        const resTipoInstitucion = await axios.get(tipoInstitucion);
+        setInstitucion(resTipoInstitucion.data);
+
+    }
+
     // COLUMNAS DE LAS TABLAS
     const columnas = [
         {
@@ -102,9 +132,10 @@ export default function Programas() {
                             <Input.Group>
                                 <Typography.Text>Tipo institución:</Typography.Text>
                                 <Select className="margin-left" defaultValue="Seleccione" style={{ width: 180 }}>
-                                    <Select.Option value="jack">Jack</Select.Option>
-                                    <Select.Option value="lucy">Lucy</Select.Option>
-                                    <Select.Option value="Yiminghe">yiminghe</Select.Option>
+                                    {stInstitucion ? (stInstitucion.map((data) =>
+                                        <Select.Option value={data.idTipoInstitucion} key={data.idTipoInstitucion}>{data.nombreInstitucion}</Select.Option>
+                                    )
+                                    ) : null}
                                 </Select>
                             </Input.Group>
                         </Col>
@@ -112,9 +143,10 @@ export default function Programas() {
                             <Input.Group>
                                 <Typography.Text>Facultad:</Typography.Text>
                                 <Select className="margin-left" defaultValue="Seleccione" style={{ width: 180 }}>
-                                    <Select.Option value="jack">Jack</Select.Option>
-                                    <Select.Option value="lucy">Lucy</Select.Option>
-                                    <Select.Option value="Yiminghe">yiminghe</Select.Option>
+                                    {stFacultades ? (stFacultades.map((data) =>
+                                        <Select.Option value={data.idFacultad} key={data.idFacultad}>{data.nombreFacultad}</Select.Option>
+                                    )
+                                    ) : null}
                                 </Select>
                             </Input.Group>
                         </Col>
