@@ -1,9 +1,29 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 // CSS
 import { Row, Col, Input, Typography, Select, Button, Checkbox } from "antd";
 import { SaveOutlined, LeftCircleOutlined } from '@ant-design/icons';
 
 export default function Crearsalon() {
+
+    //State de salones
+    const [stSalones, setSalones] = React.useState('');
+
+    useEffect(() => {
+
+        salonesApi();
+
+    }, []);
+
+    const salonesApi = async () => {
+
+        const salones = 'https://app-gestion-aunar.herokuapp.com/salones';
+        const resSalones = await axios.get(salones);
+        setSalones(resSalones.data);
+
+    }
+
+
 
     function onChange(checkedValues) {
         console.log('checked = ', checkedValues);
@@ -28,8 +48,10 @@ export default function Crearsalon() {
                             <Input.Group>
                                 <Typography.Text>Bloque:</Typography.Text>
                                 <Select className="margin-left" defaultValue="Seleccione" style={{ width: 150 }}>
-                                    <Select.Option value="jack">nnnnnn</Select.Option>
-                                    <Select.Option value="lucy">pppppp</Select.Option>
+                                    {stSalones ? (stSalones.map((data) =>
+                                        <Select.Option value={data.idSalon} key={data.idSalon}>{data.bloque}</Select.Option>
+                                    )
+                                    ) : null}
                                 </Select>
                             </Input.Group>
                         </Col>
@@ -37,8 +59,10 @@ export default function Crearsalon() {
                             <Input.Group>
                                 <Typography.Text>Tipo:</Typography.Text>
                                 <Select className="margin-left" defaultValue="Seleccione" style={{ width: 150 }}>
-                                    <Select.Option value="jack">nnnnnn</Select.Option>
-                                    <Select.Option value="lucy">pppppp</Select.Option>
+                                {stSalones ? (stSalones.map((data) =>
+                                        <Select.Option value={data.idSalon} key={data.idSalon}>{data.tipoSalon}</Select.Option>
+                                    )
+                                    ) : null}
                                 </Select>
                             </Input.Group>
                         </Col>

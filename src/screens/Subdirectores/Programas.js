@@ -26,14 +26,24 @@ export default function Programas() {
 
     const [stFacultades, setFacultades] = React.useState('');
     const [stInstitucion, setInstitucion] = React.useState('');
+    const [stPrograma, setPrograma] = React.useState('')
 
     useEffect(() => {
 
         facultadApi();
         consultarAPI();
-
+        programasApi();
 
     }, []);
+
+    const programasApi = async () => {
+
+        const programa = 'https://app-gestion-aunar.herokuapp.com/programa';
+        const resPrograma = await axios.get(programa);
+        setPrograma(resPrograma.data);
+
+    }
+
 
     const facultadApi = async () => {
 
@@ -54,19 +64,39 @@ export default function Programas() {
     // COLUMNAS DE LAS TABLAS
     const columnas = [
         {
+            title: "Id",
+            dataIndex: "idPrograma",
+            key: "idPrograma",
+        },
+        {
             title: "Nombre del programa",
-            dataIndex: "nombre_programa",
-            key: "nombre_programa",
+            dataIndex: "nombrePrograma",
+            key: "nombrePrograma",
         },
         {
-            title: "Codigo",
-            dataIndex: "codigo",
-            key: "codigo",
+            title: "Numero del semestre",
+            dataIndex: "numSemestres",
+            key: "numSemestres",
         },
         {
-            title: "No. Semestre",
-            dataIndex: "semestre",
-            key: "semestre",
+            title: "Codigo del programa",
+            dataIndex: "codPrograma",
+            key: "codPrograma",
+        },
+        {
+            title: "Jornada",
+            dataIndex: "jornada",
+            key: "jornada",
+        },
+        {
+            title: "Facultad",
+            dataIndex: "Facultad_idFacultad",
+            key: "Facultad_idFacultad",
+        },
+        {
+            title: "Institucion",
+            dataIndex: "Facultad_TipoInstitucion_idTipoInstitucion",
+            key: "Facultad_TipoInstitucion_idTipoInstitucion",
         },
         {
             title: "Ver",
@@ -151,7 +181,7 @@ export default function Programas() {
                             </Input.Group>
                         </Col>
                         <Col span={24} className="select-space">
-                            <Table dataSource={dataS} columns={columnas} />
+                            <Table dataSource={stPrograma} columns={columnas} />
                         </Col>
                     </Row>
                 </Row>

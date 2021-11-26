@@ -32,10 +32,9 @@ export default function Salones() {
 
     const salonesApi = async () => {
 
-        const salones = 'https://app-gestion-aunar.herokuapp.com/roles';
+        const salones = 'https://app-gestion-aunar.herokuapp.com/salones';
         const resSalones = await axios.get(salones);
-        setSalones(resSalones .data);
-        console.log(stSalones);
+        setSalones(resSalones.data);
 
     }
 
@@ -102,9 +101,10 @@ export default function Salones() {
                             <Input.Group>
                                 <Typography.Text>Bloque:</Typography.Text>
                                 <Select className="margin-left" defaultValue="Seleccione" style={{ width: 180 }}>
-                                    <Select.Option value="jack">Jack</Select.Option>
-                                    <Select.Option value="lucy">Lucy</Select.Option>
-                                    <Select.Option value="Yiminghe">yiminghe</Select.Option>
+                                    {stSalones ? (stSalones.map((data) =>
+                                        <Select.Option value={data.idSalon} key={data.idSalon}>{data.bloque}</Select.Option>
+                                    )
+                                    ) : null}
                                 </Select>
                             </Input.Group>
                         </Col>
@@ -112,9 +112,10 @@ export default function Salones() {
                             <Input.Group>
                                 <Typography.Text>Tipo:</Typography.Text>
                                 <Select className="margin-left" defaultValue="Seleccione" style={{ width: 180 }}>
-                                    <Select.Option value="jack">Jack</Select.Option>
-                                    <Select.Option value="lucy">Lucy</Select.Option>
-                                    <Select.Option value="Yiminghe">yiminghe</Select.Option>
+                                {stSalones ? (stSalones.map((data) =>
+                                        <Select.Option value={data.idSalon} key={data.idSalon}>{data.capacidad}</Select.Option>
+                                    )
+                                    ) : null}
                                 </Select>
                             </Input.Group>
                         </Col>

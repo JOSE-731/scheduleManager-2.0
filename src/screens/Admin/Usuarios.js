@@ -1,28 +1,29 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 // CSS
 import { Row, Col, Table, Button } from "antd";
-import { DeleteOutlined, EditOutlined, PlusOutlined, LeftCircleOutlined} from '@ant-design/icons';
+import { DeleteOutlined, EditOutlined, PlusOutlined, LeftCircleOutlined } from '@ant-design/icons';
 import { useHistory } from "react-router-dom";
 
-const dataS = [
-  {
-    key: "1",
-    nombre_usuario: "Andrea Cerquera Lopez",
-    tipo: "Profesor",
-    numero_cedula: 100000001,
-    email_institucional: "profesor@correo.com"
-  },
-  {
-    key: "2",
-    nombre_usuario: "Andrea Martinez Lopez",
-    tipo: "Profesor",
-    numero_cedula: 100000002,
-    email_institucional: "profesor@correo.com"
-  },
-];
-
-
 export default function Usuarios() {
+
+  //State de usuarios
+  const [stUsers, setUsers] = React.useState('');
+
+  useEffect(() => {
+
+    UsersApi();
+
+  }, []);
+
+  const UsersApi = async () => {
+
+    const users = 'https://app-gestion-aunar.herokuapp.com/usuarios';
+    const resUsers = await axios.get(users);
+    setUsers(resUsers.data);
+
+  }
+
   // COLUMNAS DE LAS TABLAS
   const history = useHistory();
   const gotoScreen = (screen) => {
@@ -30,24 +31,34 @@ export default function Usuarios() {
   };
   const columnas = [
     {
+      title: "Id",
+      dataIndex: "idUsuario",
+      key: "idUsuario",
+    },
+    {
       title: "Nombre",
-      dataIndex: "nombre_usuario",
-      key: "nombre_usuario",
+      dataIndex: "nombreUsuario",
+      key: "nombreUsuario",
     },
     {
-      title: "Tipo usuario",
-      dataIndex: "tipo",
-      key: "tipo",
-    },
-    {
-      title: "Numero de cédula",
-      dataIndex: "numero_cedula",
-      key: "numero_cedula",
+      title: "Apellido",
+      dataIndex: "apellidoUsuario",
+      key: "apellidoUsuario",
     },
     {
       title: "Email institucional",
-      dataIndex: "email_institucional",
-      key: "email_institucional",
+      dataIndex: "correo",
+      key: "correo",
+    },
+    {
+      title: "Numero de cédula",
+      dataIndex: "numIdentificacion",
+      key: "numIdentificacion",
+    },
+    {
+      title: "Tipo usuario",
+      dataIndex: "Roles_idRol",
+      key: "Roles_idRol",
     },
     {
       title: "Editar",
@@ -97,7 +108,12 @@ export default function Usuarios() {
           </Row>
           <Row style={{ width: "100%" }}>
             <Col span={24}>
-              <Table dataSource={dataS} columns={columnas} />
+              {stUsers ? (
+                <Table dataSource={stUsers} columns={columnas} />
+
+              ) : null
+
+              }
             </Col>
           </Row>
         </Row>
