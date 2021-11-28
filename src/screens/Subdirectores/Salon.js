@@ -4,21 +4,6 @@ import axios from "axios";
 import { Row, Col, Table, Button, Input, Select, Typography } from "antd";
 import { DeleteOutlined, EyeOutlined, EditOutlined, PlusOutlined, LeftCircleOutlined } from '@ant-design/icons';
 
-
-const dataS = [
-    {
-        key: "1",
-        nomenclatura: "1- S1",
-        capacidad: "35"
-    },
-    {
-        key: "2",
-        nomenclatura: "2- D2",
-        capacidad: "38"
-    }
-];
-
-
 export default function Salones() {
 
     //State de Salones
@@ -120,7 +105,7 @@ export default function Salones() {
                             </Input.Group>
                         </Col>
                         <Col span={24} className="select-space">
-                            <Table dataSource={dataS} columns={columnas} />
+                            <Table dataSource={stSalones} columns={columnas} />
                         </Col>
                     </Row>
                 </Row>
