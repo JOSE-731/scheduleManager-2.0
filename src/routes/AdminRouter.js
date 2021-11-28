@@ -13,6 +13,7 @@ import Actualizarusuarios from "../screens/Admin/Actualizarusuario";
 
 // COMPONENTS
 import Navbar from "../components/Navbar";
+import CreateUser from "../screens/Login/CreateUser";
 
 export default function AdminRouter() {
   return (
@@ -41,6 +42,9 @@ export default function AdminRouter() {
       </Route>
       <Route exact path="/Administrador/ActualizarUsuarios">
         <Actualizarusuarios />
+      </Route>
+      <Route exact path="/Administrador/Createuser">
+       <CreateUser/>
       </Route>
     </React.Fragment>
   );
