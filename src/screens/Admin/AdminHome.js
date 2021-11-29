@@ -25,20 +25,22 @@ const  AdminHome = (props) => {
 
   return (
     <div className="d-flex align-center justify-content-center flex-direction-columm" style={{ height: "100%" }}>
-      <Row>
-        <Col>
+      <Row style={{ width: "100%" }}>
+        <Col span={12} style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
           <BookOutlined
             className="font-size-100 justify-content-center font-color-FFFFFF"
-            onClick={() => gotoScreen("/Administrador/VerperiodoPlan")}
+            onClick={() => gotoScreen("/Administrador/PeriodoPlan")}
             label="Planes académicos"
           />
           <span className="d-flex no-margin justify-content-center font-color-FFFFFF">Planes Académicos</span>
         </Col>
-        <Col>
-          <UsergroupAddOutlined className="font-size-100 font-color-FFFFFF" onClick={() => gotoScreen("/Createuser/")} />
-          <span className="d-flex no-margin justify-content-center font-color-FFFFFF">
-            Usuarios
-          </span>
+        <Col span={12} style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
+          <UsergroupAddOutlined
+            className="font-size-100 justify-content-center font-color-FFFFFF"
+            onClick={() => gotoScreen("/Administrador/Usuarios")}
+            label="usuarios"
+          />
+          <span className="d-flex no-margin justify-content-center font-color-FFFFFF">Usuarios</span>
         </Col>
       </Row>
     </div>
