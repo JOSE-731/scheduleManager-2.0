@@ -3,8 +3,16 @@ import axios from "axios";
 // CSS
 import { Row, Col, Table, Button, Input, Select, Typography } from "antd";
 import { DeleteOutlined, EyeOutlined, EditOutlined, PlusOutlined, LeftCircleOutlined } from '@ant-design/icons';
+import { useHistory } from "react-router-dom";
 
 export default function Salones() {
+
+    const history = useHistory();
+    const gotoScreen = (screen) => {
+        return history.push(screen);
+      };
+
+
 
     //State de Salones
     const [stSalones, setSalones] = React.useState('');
@@ -68,7 +76,7 @@ export default function Salones() {
                 <Row className="box-select-content border-radius-10 box-shadow" style={{ padding: "2%" }}>
                     <Row style={{ width: "100%", padding: "2%" }} className="d-flex justify-content-center">
                         <Col span={4}>
-                            <Button type="primary" shape="round" icon={<LeftCircleOutlined />} >
+                            <Button type="primary" shape="round" icon={<LeftCircleOutlined />}  onClick={() => gotoScreen("/Subdirector/")} >
                                 Salir
                             </Button>
                         </Col>

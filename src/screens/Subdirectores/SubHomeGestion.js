@@ -23,7 +23,7 @@ export default function SubdirectorsubHome() {
                 <Col span={12} style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
                     <HomeOutlined
                     className="font-size-100 justify-content-center font-color-FFFFFF" 
-                    onClick={() => gotoScreen("/Administrador/Usuarios")}
+                    onClick={() => gotoScreen("/Subdirector/Salones")}
                     label="usuarios"
                     />
                     <span className="d-flex no-margin justify-content-center font-color-FFFFFF">Salones</span>

@@ -18,6 +18,8 @@ import VerPlanAcademico from "../screens/Subdirectores/VerPlanAcademico";
 import Usuarios from "../screens/Subdirectores/Usuarios";
 import Usuario from "../screens/Subdirectores/Usuarios";
 import CreateUser from "../screens/Login/CreateUser";
+import CreateUsers from "../screens/Subdirectores/CreateUser";
+import Crearusuario from "../screens/Subdirectores/CreateUser";
 
 export default function SubdirectoresRouter() {
 
@@ -53,6 +55,9 @@ export default function SubdirectoresRouter() {
       </Route>
       <Route exact path="/Subdirector/Createuser">
       <CreateUser/>
+      </Route>
+      <Route exact path="/Subdirector/CrearUsuarios">
+       <Crearusuario/>
       </Route>
     </React.Fragment>
   );

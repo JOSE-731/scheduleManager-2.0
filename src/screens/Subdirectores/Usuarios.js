@@ -101,7 +101,7 @@ export default function Usuario() {
               <span className="titulos">Usuarios</span>
             </Col>
             <Col span={4}>
-              <Button type="primary" shape="round" icon={<PlusOutlined />} onClick={() => gotoScreen("/Administrador/CrearUsuarios")}>
+              <Button type="primary" shape="round" icon={<PlusOutlined />} onClick={() => gotoScreen("/Subdirector/CrearUsuarios")}>
                 Crear usuario
               </Button>
             </Col>
