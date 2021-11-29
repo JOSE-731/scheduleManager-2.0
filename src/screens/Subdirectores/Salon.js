@@ -84,7 +84,7 @@ export default function Salones() {
                             <span className="titulos">Salones</span>
                         </Col>
                         <Col span={4}>
-                            <Button type="primary" shape="round" icon={<PlusOutlined />} >
+                            <Button type="primary" shape="round" icon={<PlusOutlined />} onClick={() => gotoScreen("/Subdirector/CrearSalones")} >
                                 Crear Salon
                             </Button>
                         </Col>
