@@ -15,7 +15,7 @@ export default function SubdirectorHome() {
                 <Col span={8} style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
                     <BookOutlined
                     className="font-size-100 justify-content-center font-color-FFFFFF" 
-                    onClick={() => gotoScreen("/Administrador/PeriodoPlan")}
+                    onClick={() => gotoScreen("/Subdirector/VerPlaneacionAcademica")}
                     label="Planes académicos"
                     />
                     <span className="d-flex no-margin justify-content-center font-color-FFFFFF">Planes Académicos</span>
@@ -23,7 +23,7 @@ export default function SubdirectorHome() {
                 <Col span={8} style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
                     <UsergroupAddOutlined
                     className="font-size-100 justify-content-center font-color-FFFFFF" 
-                    onClick={() => gotoScreen("/Administrador/Usuarios")}
+                    onClick={() => gotoScreen("/Subdirector/Usuarios")}
                     label="usuarios"
                     />
                     <span className="d-flex no-margin justify-content-center font-color-FFFFFF">Usuarios</span>

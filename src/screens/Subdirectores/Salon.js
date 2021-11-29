@@ -82,28 +82,7 @@ export default function Salones() {
                         </Col>
                     </Row>
                     <Row style={{ width: "100%" }}>
-                        <Col span={12} className="select-space">
-                            <Input.Group>
-                                <Typography.Text>Bloque:</Typography.Text>
-                                <Select className="margin-left" defaultValue="Seleccione" style={{ width: 180 }}>
-                                    {stSalones ? (stSalones.map((data) =>
-                                        <Select.Option value={data.idSalon} key={data.idSalon}>{data.bloque}</Select.Option>
-                                    )
-                                    ) : null}
-                                </Select>
-                            </Input.Group>
-                        </Col>
-                        <Col span={12} className="select-space">
-                            <Input.Group>
-                                <Typography.Text>Tipo:</Typography.Text>
-                                <Select className="margin-left" defaultValue="Seleccione" style={{ width: 180 }}>
-                                {stSalones ? (stSalones.map((data) =>
-                                        <Select.Option value={data.idSalon} key={data.idSalon}>{data.capacidad}</Select.Option>
-                                    )
-                                    ) : null}
-                                </Select>
-                            </Input.Group>
-                        </Col>
+        
                         <Col span={24} className="select-space">
                             <Table dataSource={stSalones} columns={columnas} />
                         </Col>

@@ -13,6 +13,11 @@ import RegHome from "../screens/RegControl/RegHome"
 
 // COMPONENTS
 import Navbar from "../components/Navbar";
+import VerPlaneacionAcademica from "../screens/Admin/Verplanesacademicos";
+import VerPlanAcademico from "../screens/Subdirectores/VerPlanAcademico";
+import Usuarios from "../screens/Subdirectores/Usuarios";
+import Usuario from "../screens/Subdirectores/Usuarios";
+import CreateUser from "../screens/Login/CreateUser";
 
 export default function SubdirectoresRouter() {
 
@@ -39,6 +44,15 @@ export default function SubdirectoresRouter() {
       </Route>
       <Route exact path="/Subdirector/Homeregistrocontrol">
         <RegHome />
+      </Route>
+      <Route exact path="/Subdirector/VerPlaneacionAcademica">
+        <VerPlanAcademico/>
+      </Route>
+      <Route exact path="/Subdirector/Usuarios">
+        <Usuario/>
+      </Route>
+      <Route exact path="/Subdirector/Createuser">
+      <CreateUser/>
       </Route>
     </React.Fragment>
   );

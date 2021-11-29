@@ -64,8 +64,8 @@ export default function Crearusuarios() {
             </Col>
             <Col span={8} className="select-space">
               <Input.Group style={{ display: 'flex', flexDirection: 'row' }}>
-                <Typography.Text>Numero de cedula:</Typography.Text>
-                <Input placeholder="1111111" />
+                <Typography.Text>Contraseña:</Typography.Text>
+                <Input  disabled/>
               </Input.Group>
             </Col>
             <Col span={8} className="select-space">
