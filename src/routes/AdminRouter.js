@@ -35,7 +35,7 @@ export default function AdminRouter() {
         <PlaneacionAcademica />
       </Route>
       <Route exact path="/Administrador/Usuarios">
-        <Usuarios />
+       <Crearusuarios/>
       </Route>
       <Route exact path="/Administrador/CrearUsuarios">
         <Crearusuarios />

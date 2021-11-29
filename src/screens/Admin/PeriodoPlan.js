@@ -83,7 +83,7 @@ export default function VerperiodoPlan() {
               <span className="titulos">Planes academicos</span>
             </Col>
             <Col span={4}>
-              <Button type="primary" shape="round" icon={<PlusOutlined />} >
+              <Button type="primary" shape="round" icon={<PlusOutlined />} onClick={() => gotoScreen("/Administrador/PlaneacionAcademica")}>
                 Crear plan academico
               </Button>
             </Col>
