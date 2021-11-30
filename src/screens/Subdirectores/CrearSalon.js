@@ -1,14 +1,29 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, Component, state } from "react";
 import axios from "axios";
 // CSS
 import { Row, Col, Input, Typography, Select, Button, Checkbox } from "antd";
 import { SaveOutlined, LeftCircleOutlined } from '@ant-design/icons';
+import { useHistory } from "react-router-dom";
 
 export default function Crearsalon() {
 
+    const history = useHistory();
+    const gotoScreen = (screen) => {
+        return history.push(screen);
+    };
+
+    
     //State de salones
     const [stSalones, setSalones] = React.useState('');
+    const [stTipo, setTipo] = React.useState('');
+    const [stCapacidad, setCapacidad] = React.useState('');
+    const [stSalon, setSalon] = useState({
+        capacidad: '',
+        tipo: '',
+        nomeclatura: ''
+   })
 
+    console.log(stTipo);
     useEffect(() => {
 
         salonesApi();
@@ -28,13 +43,19 @@ export default function Crearsalon() {
     function onChange(checkedValues) {
         console.log('checked = ', checkedValues);
     }
+
+    const handleChange = e =>{
+        stSalon({
+            [e.target.name]: e.target.value
+        })
+    }
     return (
         <React.Fragment>
-            <div className="d-flex justify-content-center align-center flex-direction-columm" style={{ height: "100%" }}>
+           <div className="d-flex justify-content-center align-center flex-direction-columm" style={{ height: "100%" }}>
                 <Row className="box-select-content border-radius-10 box-shadow" style={{ padding: "2%" }}>
                     <Row style={{ width: "100%", padding: "2%" }} className="d-flex justify-content-center">
                         <Col span={4}>
-                            <Button type="primary" shape="round" icon={<LeftCircleOutlined />} >
+                            <Button type="primary" shape="round" icon={<LeftCircleOutlined />} onClick={() => gotoScreen("/Subdirector")}>
                                 Salir
                             </Button>
                         </Col>
@@ -46,41 +67,30 @@ export default function Crearsalon() {
                     <Row style={{ width: "100%" }}>
                         <Col span={6} className="select-space">
                             <Input.Group>
-                                <Typography.Text>Bloque:</Typography.Text>
-                                <Select className="margin-left" defaultValue="Seleccione" style={{ width: 150 }}>
-                                    {stSalones ? (stSalones.map((data) =>
-                                        <Select.Option value={data.idSalon} key={data.idSalon}>{data.bloque}</Select.Option>
-                                    )
-                                    ) : null}
-                                </Select>
-                            </Input.Group>
-                        </Col>
-                        <Col span={6} className="select-space">
-                            <Input.Group>
                                 <Typography.Text>Tipo:</Typography.Text>
                                 <Select className="margin-left" defaultValue="Seleccione" style={{ width: 150 }}>
-                                {stSalones ? (stSalones.map((data) =>
-                                        <Select.Option value={data.idSalon} key={data.idSalon}>{data.tipoSalon}</Select.Option>
+                                    {stSalones ? (stSalones.map((data) =>
+                                        <Select.Option value={data.idSalon} key={data.idSalon} name={data.tipoSalon} onChange={handleChange}>{data.tipoSalon}</Select.Option>
                                     )
                                     ) : null}
                                 </Select>
                             </Input.Group>
                         </Col>
                         <Col span={5} className="select-space">
-                            <Input.Group style={{ display: 'flex', flexDirection: 'row' }}>
+                            <Input.Group  style={{ display: 'flex', flexDirection: 'row' }} onChange={handleChange} name="nomenclatura">
                                 <Typography.Text>Nomenclatura:</Typography.Text>
                                 <Input />
                             </Input.Group>
                         </Col>
                         <Col span={5} className="select-space">
-                            <Input.Group style={{ display: 'flex', flexDirection: 'row' }}>
-                                <Typography.Text>Capacidad:</Typography.Text>
+                            <Input.Group name="capacidad" style={{ display: 'flex', flexDirection: 'row' }} onChange={handleChange}>
+                                <Typography.Text >Capacidad:</Typography.Text>
                                 <Input />
                             </Input.Group>
                         </Col>
                         <Col span={2} style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
                             <SaveOutlined className="font-size-18" />
-                            <span>Guardar</span>
+                           <boton>Guardar</boton>
                         </Col>
                     </Row>
                 </Row>

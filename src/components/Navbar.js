@@ -1,13 +1,22 @@
 import React from "react";
 // CSS
 import { Menu, Grid, Button, Drawer, Image } from "antd";
+import { useHistory } from "react-router-dom";
 // IMAGE
 import Logo from "./../assets/logo.png";
 
 export default function Navbar() {
+
+  
   const [visible, setVisible] = React.useState(false);
   const onClose = () => setVisible(false);
   const showDrawer = () => setVisible(true);
+  
+  const history = useHistory();
+  const gotoScreen = (screen) => {
+    return history.push(screen);
+  };
+
   return (
     <nav className="menuBar">
       <div className="logo">
