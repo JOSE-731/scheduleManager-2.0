@@ -12,8 +12,48 @@ export default function Crearsalon() {
         return history.push(screen);
     };
 
-    
-    //State de salones
+    //nuevo codigo crear salon
+    const [salon, setsalon] = useState({
+        tipoSalon: '',
+        capacidad: '',
+        nomenclatura: ''
+    });
+
+    const handlechange1 = e => {
+        setsalon({
+            ...salon,
+            [e.target.name]: e.target.value
+        })
+    }
+
+    //envio de datos
+    const handleSubmit = () => {
+        console.log('ingreso todo');
+        //validación de datos
+        if(salon.tipoSalon === '' || salon.capacidad === '' || salon.nomenclatura === ''){
+            alert('Todos los campos son necesarios');
+            return
+        }
+
+        //consulta para enviar datos
+        const requestInit = {
+            method: 'post',
+            Headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify(salon)
+        }
+        fetch('https://app-gestion-aunar.herokuapp.com/salones', requestInit)
+        .then(res => res.json())
+        .then(res => console.log(res))
+
+        //reiniciando state del salon
+        setsalon({
+            tipoSalon: '',
+            capacidad: '',
+            nomenclatura: ''
+        })
+    }
+
+    //State de salones 
     const [stSalones, setSalones] = React.useState('');
     const [stTipo, setTipo] = React.useState('');
     const [stCapacidad, setCapacidad] = React.useState('');
@@ -23,7 +63,6 @@ export default function Crearsalon() {
         nomeclatura: ''
    })
 
-    console.log(stTipo);
     useEffect(() => {
 
         salonesApi();
@@ -45,6 +84,7 @@ export default function Crearsalon() {
     }
 
     const handleChange = e =>{
+        console.log('hola mudno');
         stSalon({
             [e.target.name]: e.target.value
         })
@@ -70,27 +110,27 @@ export default function Crearsalon() {
                                 <Typography.Text>Tipo:</Typography.Text>
                                 <Select className="margin-left" defaultValue="Seleccione" style={{ width: 150 }}>
                                     {stSalones ? (stSalones.map((data) =>
-                                        <Select.Option value={data.idSalon} key={data.idSalon} name={data.tipoSalon} onChange={handleChange}>{data.tipoSalon}</Select.Option>
+                                        <Select.Option value={data.tipoSalon} key={data.idSalon} name={data.tipoSalon} onChange={handlechange1}>{data.tipoSalon}</Select.Option>
                                     )
                                     ) : null}
                                 </Select>
                             </Input.Group>
                         </Col>
                         <Col span={5} className="select-space">
-                            <Input.Group  style={{ display: 'flex', flexDirection: 'row' }} onChange={handleChange} name="nomenclatura">
-                                <Typography.Text>Nomenclatura:</Typography.Text>
+                            <Input.Group  style={{ display: 'flex', flexDirection: 'row' }} onChange={handlechange1} name="capacidad" value='capacidad' type="text" id="capacidad">
+                                <Typography.Text>Capacidad:</Typography.Text>
                                 <Input />
                             </Input.Group>
                         </Col>
                         <Col span={5} className="select-space">
-                            <Input.Group name="capacidad" style={{ display: 'flex', flexDirection: 'row' }} onChange={handleChange}>
-                                <Typography.Text >Capacidad:</Typography.Text>
+                            <Input.Group name="nomenclatura" value="nomenclatura" type="text" id="nomenclatura" style={{ display: 'flex', flexDirection: 'row' }} onChange={handlechange1}>
+                                <Typography.Text >Nomenclatura:</Typography.Text>
                                 <Input />
                             </Input.Group>
                         </Col>
-                        <Col span={2} style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
+                        <Col span={2} style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }} onSubmit={handleSubmit}>
                             <SaveOutlined className="font-size-18" />
-                           <boton>Guardar</boton>
+                           <boton type="submit">Guardar</boton>
                         </Col>
                     </Row>
                 </Row>
