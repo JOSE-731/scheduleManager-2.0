@@ -72,7 +72,7 @@ export default function Salones() {
     }
     return (
         <React.Fragment>
-            <div className="d-flex justify-content-center align-center flex-direction-columm" style={{ height: "100%" }}>
+           <div className="d-flex justify-content-center align-center flex-direction-columm" style={{ height: "100%", paddingTop: "7%" }}>
                 <Row className="box-select-content border-radius-10 box-shadow" style={{ padding: "2%" }}>
                     <Row style={{ width: "100%", padding: "2%" }} className="d-flex justify-content-center">
                         <Col span={4}>
@@ -90,9 +90,18 @@ export default function Salones() {
                         </Col>
                     </Row>
                     <Row style={{ width: "100%" }}>
-        
+                    <Col span={12} className="select-space-small">
+                            <Input.Group>
+                                <Typography.Text>Tipo:</Typography.Text>
+                                <Select className="margin-left" defaultValue="Seleccione" style={{ width: 180 }}>
+                                    <Select.Option value="jack">Jack</Select.Option>
+                                    <Select.Option value="lucy">Lucy</Select.Option>
+                                    <Select.Option value="Yiminghe">yiminghe</Select.Option>
+                                </Select>
+                            </Input.Group>
+                        </Col>
                         <Col span={24} className="select-space">
-                            <Table dataSource={stSalones} columns={columnas} />
+                             <Table pagination={{ position: ["bottomRight"], pageSize: 4 }} dataSource={stSalones} columns={columnas} />
                         </Col>
                     </Row>
                 </Row>

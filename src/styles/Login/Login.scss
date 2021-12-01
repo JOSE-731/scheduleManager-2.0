@@ -3,7 +3,9 @@
   height: 100vh;
   width: 100%;
   display: flex;
-  background-image: url("./../../assets/LoginImage.jpg");
+  background-size: cover;
+  background-image: url("./../../assets/entrada.jpeg");
+  // background-image: url("./../../assets/LoginImage.jpg");
 }
 
 .form-content-login {
