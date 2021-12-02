@@ -1,4 +1,4 @@
-import React, { useState} from "react";
+import React, { useState, useEffect } from "react";
 // CSS
 import { Row, Col, Input, Typography, Button, Form } from "antd";
 import { SaveOutlined, LeftCircleOutlined } from '@ant-design/icons';
@@ -6,15 +6,27 @@ import { useHistory } from "react-router-dom";
 
 
 export default function Crearusuario() {
+  
   const history = useHistory();
+  const gotoScreen = (screen) => {
+    return history.push(screen);
+  };
 
-  //nuevo código
+  useEffect(() => {
+    const getUsuarios = () => {
+      fetch('https://app-gestion-aunar.herokuapp.com/roles')
+        .then(res => res.json())
+        .then(res => setRoles(res))
+    }
+    getUsuarios();
+  }, [])
 
+  const [roles, setRoles] = useState([]);
   const [usuario, setUsuario] = useState({
     nombreUsuario: '',
     apellidoUsuario: '',
     correo: '',
-    Roles_idRol: 0
+    Roles_idRol: ''
   });
 
   const handleChange = e => {
@@ -35,12 +47,12 @@ export default function Crearusuario() {
     //enviar datos
     const requestInit = {
       method: 'POST',
-      headers: {'Content-Type': 'application/json'},
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(usuario)
     }
     fetch('https://app-gestion-aunar.herokuapp.com/usuarios', requestInit)
-    .then(res => res.text())
-    .then(res => console.log(res))
+      .then(res => res.text())
+      .then(res => console.log(res))
     alert('Guardado Exitosamente');
 
     setUsuario({
@@ -49,11 +61,10 @@ export default function Crearusuario() {
       correo: '',
       Roles_idRol: 0
     });
+
+    gotoScreen("/Subdirector/Usuarios")
   }
 
-  const gotoScreen = (screen) => {
-    return history.push(screen);
-  };
   return (
     <React.Fragment>
       <div className="d-flex justify-content-center align-center flex-direction-columm" style={{ height: "100%" }}>
@@ -77,15 +88,21 @@ export default function Crearusuario() {
               </Form.Item>
 
               <Form.Item label="Apellido del Usuario" span={8} className="select-space">
-                <Input placeholder="Escobar" onChange={handleChange} name="apellidoUsuario" value={usuario.apellidoUsuario}/>
+                <Input placeholder="Escobar" onChange={handleChange} name="apellidoUsuario" value={usuario.apellidoUsuario} />
               </Form.Item>
 
               <Form.Item label="E-mail Institucional" span={8} className="select-space">
-                <Input placeholder="diana.escobar@aunarvillavicencio.edu.co" onChange={handleChange} name="correo" value={usuario.correo}/>
+                <Input placeholder="diana.escobar@aunarvillavicencio.edu.co" onChange={handleChange} name="correo" value={usuario.correo} />
               </Form.Item>
 
               <Form.Item label="Tipo Usuario" span={8} className="select-space">
-                <Input placeholder=" 1 - 4" onChange={handleChange} name="Roles_idRol" value={usuario.Roles_idRol} />
+                <select name="Roles_idRol" style={{ width: 120 }} onChange={handleChange}>
+                  {
+                    roles ? (roles.map((data) =>
+                      <option value={data.idRol}>{data.nombreRol}</option>
+                    )) : null
+                  }
+                </select>
               </Form.Item>
 
               <Col span={4} style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>

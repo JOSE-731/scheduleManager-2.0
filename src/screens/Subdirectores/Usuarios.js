@@ -79,7 +79,7 @@ export default function Usuario() {
   const handleUpdate = id => {
     const requestInit = {
       method: 'PUT',
-      headers: {'Content-Type': 'application/json'},
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify()
     }
     fetch('https://app-gestion-aunar.herokuapp.com/usuarios/' + id, requestInit)
@@ -89,6 +89,7 @@ export default function Usuario() {
 
     setListaactualizada(true);
   }
+  
   return (
     <React.Fragment>
       <div className="d-flex justify-content-center align-center flex-direction-columm" style={{ height: "100%" }}>
