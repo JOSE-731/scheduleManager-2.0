@@ -1,7 +1,6 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
+import React, { useState} from "react";
 // CSS
-import { Row, Col, Input, Typography, Select, Button} from "antd";
+import { Row, Col, Input, Typography, Button, Form } from "antd";
 import { SaveOutlined, LeftCircleOutlined } from '@ant-design/icons';
 import { useHistory } from "react-router-dom";
 
@@ -9,23 +8,52 @@ import { useHistory } from "react-router-dom";
 export default function Crearusuario() {
   const history = useHistory();
 
-   //State de roles
-   const [stRoles, setRoles] = React.useState('');
+  //state para guardar los datos ingresados
+  const [usuario, setUsuario] = useState({
+    nombreUsuario: '',
+    apellidoUsuario: '',
+    correo: '',
+    Roles_idRol: 0
+  });
 
-   useEffect(() => {
- 
-     rolesApi();
- 
-   }, []);
- 
-   const rolesApi = async () => {
- 
-     const roles= 'https://app-gestion-aunar.herokuapp.com/roles';
-     const resRoles = await axios.get(roles);
-     setRoles(resRoles.data);
- 
-   }
-   
+  //para obtener los datos del formulario
+  const handleChange = e => {
+    setUsuario({
+      ...usuario,
+      [e.target.name]: e.target.value
+    })
+  }
+
+  //metodo para crear el usuario
+  const handleSubmit = () => {
+    usuario.Roles_idRol = parseInt(usuario.Roles_idRol, 10);
+
+    //validación datos
+    if (usuario.nombreUsuario === '' || usuario.apellidoUsuario === '' || usuario.correo === '' || usuario.Roles_idRol === 0) {
+      alert('Todos los campos son necesarios');
+      return
+    }
+
+    //enviar datos
+    const requestInit = {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify(usuario)
+    }
+    fetch('https://app-gestion-aunar.herokuapp.com/usuarios', requestInit)
+    .then(res => res.text())
+    .then(res => console.log(res))
+    alert('Guardado Exitosamente');
+
+    //reiniciar state del usuario para volver a llenar
+    setUsuario({
+      nombreUsuario: '',
+      apellidoUsuario: '',
+      correo: '',
+      Roles_idRol: 0
+    });
+  }
+
   const gotoScreen = (screen) => {
     return history.push(screen);
   };
@@ -44,46 +72,36 @@ export default function Crearusuario() {
             </Col>
             <Col span={4}></Col>
           </Row>
-          <Row style={{ width: "100%" }}>
-            <Col span={8} className="select-space">
-              <Input.Group style={{ display: 'flex', flexDirection: 'row' }}>
-                <Typography.Text>Nombre del usuario:</Typography.Text>
-                <Input placeholder="Diana Carolina Escobar" />
-              </Input.Group>
-            </Col>
-            <Col span={6} className="select-space">
-              <Input.Group>
-                <Typography.Text>Tipo usuario:</Typography.Text>
-                <Select className="margin-left" defaultValue="Seleccione" style={{ width: 150 }}>
-                {stRoles ? (stRoles.map((data) =>
-                      <Select.Option value={data.idRol} key={data.idRol}>{data.nombreRol}</Select.Option>
-                    )
-                    ) : null}
-                </Select>
-              </Input.Group>
-            </Col>
-            <Col span={8} className="select-space">
-              <Input.Group style={{ display: 'flex', flexDirection: 'row' }}>
-                <Typography.Text>Contraseña:</Typography.Text>
-                <Input  disabled/>
-              </Input.Group>
-            </Col>
-            <Col span={8} className="select-space">
-              <Input.Group style={{ display: 'flex', flexDirection: 'row' }}>
-                <Typography.Text>E-mail institución:</Typography.Text>
-                <Input placeholder="usuarios@campusvitual.aunarvillavicencio.com" />
-              </Input.Group>
-            </Col>
-            <Col span={4} style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
-              <SaveOutlined className="font-size-18" />
-              <span>Guardar</span>
-            </Col>
 
-            <Col span={24} className="margin-left-2">
-              <Typography.Paragraph>
-                Nota: Tenga en cuenta que para el ingreso al sistema, debe ingresar en el correo institucional y la contraseña es su numero de cedula, Recuerde cambiar la contraseña la primera vez que ingrese al sistema para mayor seguridad de la información.
-              </Typography.Paragraph>
-            </Col>
+          <Row style={{ width: "100%" }}>
+            <Form layout="inline">
+              <Form.Item label="Nombre del Usuario" span={8} className="select-space">
+                <Input placeholder="Diana Carolina" onChange={handleChange} name="nombreUsuario" value={usuario.nombreUsuario} />
+              </Form.Item>
+
+              <Form.Item label="Apellido del Usuario" span={8} className="select-space">
+                <Input placeholder="Escobar" onChange={handleChange} name="apellidoUsuario" value={usuario.apellidoUsuario}/>
+              </Form.Item>
+
+              <Form.Item label="E-mail Institucional" span={8} className="select-space">
+                <Input placeholder="diana.escobar@aunarvillavicencio.edu.co" onChange={handleChange} name="correo" value={usuario.correo}/>
+              </Form.Item>
+
+              <Form.Item label="Tipo Usuario" span={8} className="select-space">
+                <Input placeholder=" 1 - 4" onChange={handleChange} name="Roles_idRol" value={usuario.Roles_idRol} />
+              </Form.Item>
+
+              <Col span={4} style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
+                <SaveOutlined className="font-size-18" onClick={handleSubmit} />
+                <span>Guardar</span>
+              </Col>
+
+              <Col span={24} className="margin-left-2">
+                <Typography.Paragraph>
+                  Nota: Tenga en cuenta que para el ingreso al sistema, debe ingresar en "Usuario" el correo institucional y la "contraseña" es Aunar.123, Recuerde cambiar la contraseña la primera vez que ingrese al sistema para mayor seguridad de la información.
+                </Typography.Paragraph>
+              </Col>
+            </Form>
           </Row>
         </Row>
       </div>
