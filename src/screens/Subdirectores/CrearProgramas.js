@@ -3,8 +3,13 @@ import axios from "axios";
 // CSS
 import { Row, Col, Input, Typography, Select, Button, Checkbox } from "antd";
 import { SaveOutlined, LeftCircleOutlined } from '@ant-design/icons';
+import { useHistory } from "react-router-dom";
 
 export default function Crearprogramas() {
+    const history = useHistory();
+    const gotoScreen = (screen) => {
+        return history.push(screen);
+    };
 
     const [stFacultades, setFacultades] = React.useState('');
     const [stInstitucion, setInstitucion] = React.useState('');
@@ -44,7 +49,7 @@ export default function Crearprogramas() {
                 <Row className="box-select-content border-radius-10 box-shadow" style={{ padding: "2%" }}>
                     <Row style={{ width: "100%", padding: "2%" }} className="d-flex justify-content-center">
                         <Col span={4}>
-                            <Button type="primary" shape="round" icon={<LeftCircleOutlined />} >
+                            <Button type="primary" shape="round" icon={<LeftCircleOutlined />}   onClick={() => gotoScreen("/Subdirector/Programas")}>
                                 Salir
                             </Button>
                         </Col>

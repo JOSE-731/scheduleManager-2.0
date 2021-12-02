@@ -54,7 +54,6 @@ export default function Usuario() {
   const [usuarios, setUsuarios] = useState([]);
   const [listactualizada, setListaactualizada] = useState(false);
 
-  //obtiene todos los usuarios de la base de datos
   useEffect(() => {
     const getUsuarios = () => {
       fetch('https://app-gestion-aunar.herokuapp.com/usuarios')
@@ -65,7 +64,6 @@ export default function Usuario() {
     setListaactualizada(false);
   }, [listactualizada])
 
-  //metodo para eliminar un usuario
   const handleDelete = id => {
     const requestInit = {
       method: 'DELETE'
@@ -75,10 +73,9 @@ export default function Usuario() {
       .then(res => console.log(res))
     alert('Eliminado Exitosamente');
 
-    setListaactualizada(true); //actualiza la tabla con los datos
+    setListaactualizada(true);
   }
 
-  //metodo para editar datos, aun no esta funcional
   const handleUpdate = id => {
     const requestInit = {
       method: 'PUT',
@@ -92,7 +89,6 @@ export default function Usuario() {
 
     setListaactualizada(true);
   }
-  
   return (
     <React.Fragment>
       <div className="d-flex justify-content-center align-center flex-direction-columm" style={{ height: "100%" }}>

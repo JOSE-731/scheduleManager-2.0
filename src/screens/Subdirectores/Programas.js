@@ -4,7 +4,7 @@ import axios from "axios";
 // CSS
 import { Row, Col, Table, Button, Input, Select, Typography } from "antd";
 import { DeleteOutlined, EyeOutlined, EditOutlined, PlusOutlined, LeftCircleOutlined } from '@ant-design/icons';
-
+import { useHistory } from "react-router-dom";
 
 const dataS = [
     {
@@ -23,6 +23,12 @@ const dataS = [
 
 
 export default function Programas() {
+
+    const history = useHistory();
+    const gotoScreen = (screen) => {
+        return history.push(screen);
+      };
+
 
     const [stFacultades, setFacultades] = React.useState('');
     const [stInstitucion, setInstitucion] = React.useState('');
@@ -144,7 +150,7 @@ export default function Programas() {
                 <Row className="box-select-content border-radius-10 box-shadow" style={{ padding: "2%" }}>
                     <Row style={{ width: "100%", padding: "2%" }} className="d-flex justify-content-center">
                         <Col span={4}>
-                            <Button type="primary" shape="round" icon={<LeftCircleOutlined />} >
+                            <Button type="primary" shape="round" icon={<LeftCircleOutlined />} onClick={() => gotoScreen("/Subdirector/HomeGestion")} >
                                 Salir
                             </Button>
                         </Col>
@@ -152,7 +158,7 @@ export default function Programas() {
                             <span className="titulos">Programas académicos</span>
                         </Col>
                         <Col span={4}>
-                            <Button type="primary" shape="round" icon={<PlusOutlined />} >
+                            <Button type="primary" shape="round" icon={<PlusOutlined />} onClick={() => gotoScreen("/Subdirector/CrearProgramasAcademicos")} >
                                 Crear programa
                             </Button>
                         </Col>

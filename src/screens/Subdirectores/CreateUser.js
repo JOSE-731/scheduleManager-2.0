@@ -8,7 +8,8 @@ import { useHistory } from "react-router-dom";
 export default function Crearusuario() {
   const history = useHistory();
 
-  //state para guardar los datos ingresados
+  //nuevo código
+
   const [usuario, setUsuario] = useState({
     nombreUsuario: '',
     apellidoUsuario: '',
@@ -16,7 +17,6 @@ export default function Crearusuario() {
     Roles_idRol: 0
   });
 
-  //para obtener los datos del formulario
   const handleChange = e => {
     setUsuario({
       ...usuario,
@@ -24,10 +24,8 @@ export default function Crearusuario() {
     })
   }
 
-  //metodo para crear el usuario
   const handleSubmit = () => {
     usuario.Roles_idRol = parseInt(usuario.Roles_idRol, 10);
-
     //validación datos
     if (usuario.nombreUsuario === '' || usuario.apellidoUsuario === '' || usuario.correo === '' || usuario.Roles_idRol === 0) {
       alert('Todos los campos son necesarios');
@@ -45,7 +43,6 @@ export default function Crearusuario() {
     .then(res => console.log(res))
     alert('Guardado Exitosamente');
 
-    //reiniciar state del usuario para volver a llenar
     setUsuario({
       nombreUsuario: '',
       apellidoUsuario: '',
