@@ -14,6 +14,7 @@ import Actualizarusuarios from "../screens/Admin/Actualizarusuario";
 // COMPONENTS
 import Navbar from "../components/Navbar";
 import CreateUser from "../screens/Login/CreateUser";
+import Crearusuario from "../screens/Subdirectores/CreateUser";
 
 export default function AdminRouter() {
   return (
@@ -35,10 +36,10 @@ export default function AdminRouter() {
         <PlaneacionAcademica />
       </Route>
       <Route exact path="/Administrador/Usuarios">
-       <Crearusuarios/>
+      <Crearusuario/>
       </Route>
       <Route exact path="/Administrador/CrearUsuarios">
-        <Crearusuarios />
+        <Crearusuario/>
       </Route>
       <Route exact path="/Administrador/ActualizarUsuarios">
         <Actualizarusuarios />
