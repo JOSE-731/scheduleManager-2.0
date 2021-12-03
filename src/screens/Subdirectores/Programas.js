@@ -1,73 +1,20 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
 
 // CSS
-import { Row, Col, Table, Button, Input, Select, Typography } from "antd";
-import { DeleteOutlined, EyeOutlined, EditOutlined, PlusOutlined, LeftCircleOutlined } from '@ant-design/icons';
-
-
-const dataS = [
-    {
-        key: "1",
-        nombre_programa: "Fundamentos de contabilidad",
-        codigo: "31232131",
-        semestre: 2
-    },
-    {
-        key: "2",
-        nombre_programa: "Matematicas II",
-        codigo: "34445553",
-        semestre: 5
-    },
-];
+import { Row, Col, Table, Button } from "antd";
+import { DeleteOutlined, EditOutlined, PlusOutlined, LeftCircleOutlined } from '@ant-design/icons';
+import { useHistory } from "react-router-dom";
 
 
 export default function Programas() {
 
-    const [stFacultades, setFacultades] = React.useState('');
-    const [stInstitucion, setInstitucion] = React.useState('');
-    const [stPrograma, setPrograma] = React.useState('')
-
-    useEffect(() => {
-
-        facultadApi();
-        consultarAPI();
-        programasApi();
-
-    }, []);
-
-    const programasApi = async () => {
-
-        const programa = 'https://app-gestion-aunar.herokuapp.com/programa';
-        const resPrograma = await axios.get(programa);
-        setPrograma(resPrograma.data);
-
-    }
-
-
-    const facultadApi = async () => {
-
-        const facultades = 'https://app-gestion-aunar.herokuapp.com/facultades';
-        const resFacultades = await axios.get(facultades);
-        setFacultades(resFacultades.data);
-
-    }
-
-    const consultarAPI = async () => {
-
-        const tipoInstitucion = 'https://app-gestion-aunar.herokuapp.com/tipo-institucion';
-        const resTipoInstitucion = await axios.get(tipoInstitucion);
-        setInstitucion(resTipoInstitucion.data);
-
-    }
+    const history = useHistory();
+    const gotoScreen = (screen) => {
+        return history.push(screen);
+    };
 
     // COLUMNAS DE LAS TABLAS
     const columnas = [
-        {
-            title: "Id",
-            dataIndex: "idPrograma",
-            key: "idPrograma",
-        },
         {
             title: "Nombre del programa",
             dataIndex: "nombrePrograma",
@@ -99,89 +46,92 @@ export default function Programas() {
             key: "Facultad_TipoInstitucion_idTipoInstitucion",
         },
         {
-            title: "Ver",
-            render: (datos, index) => (
-                <Row>
-                    <Col>
-                        <Button shape="circle" icon={<EyeOutlined />} onClick={() => verProgramas(datos, index)} />
-                    </Col>
-                </Row>
-            )
-        },
-        {
             title: "Editar",
-            render: (datos, index) => (
+            render: (datos) => (
                 <Row>
                     <Col>
-                        <Button shape="circle" icon={<EditOutlined />} onClick={() => editProgramas(datos, index)} />
+                        <Button shape="circle" icon={<EditOutlined />} onClick={() => handleUpdate(datos.idPrograma)} />
                     </Col>
                 </Row>
             )
         },
         {
             title: "Borrar",
-            render: (datos, index) => (
+            render: (datos) => (
                 <Row>
                     <Col>
-                        <Button shape="circle" icon={<DeleteOutlined />} onClick={() => deleteProgramas(datos, index)} />
+                        <Button shape="circle" icon={<DeleteOutlined />} onClick={() => handleDelete(datos.idPrograma)} />
                     </Col>
                 </Row>
             )
         }
     ];
-    const verProgramas = (datos, index) => {
-        console.log(datos, index, 'boton de editar')
+
+    //state de usuarios
+    const [programas, setProgramas] = useState([]);
+    const [listactualizada, setListaactualizada] = useState(false);
+
+    useEffect(() => {
+        const getProgramas = () => {
+            fetch('https://app-gestion-aunar.herokuapp.com/programa')
+                .then(res => res.json())
+                .then(res => setProgramas(res))
+        }
+        getProgramas();
+        setListaactualizada(false);
+    }, [listactualizada])
+
+    const handleDelete = id => {
+        const requestInit = {
+            method: 'DELETE'
+        }
+        fetch('https://app-gestion-aunar.herokuapp.com/programa/' + id, requestInit)
+            .then(res => res.text())
+            .then(res => console.log(res))
+        alert('Eliminado Exitosamente');
+
+        setListaactualizada(true);
     }
-    const editProgramas = (datos, index) => {
-        console.log(datos, index, 'boton de editar')
+
+    const handleUpdate = id => {
+        const requestInit = {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify()
+        }
+        fetch('https://app-gestion-aunar.herokuapp.com/programa/' + id, requestInit)
+            .then(res => res.text())
+            .then(res => console.log(res))
+        alert('Editado Exitosamente');
+
+        setListaactualizada(true);
     }
-    const deleteProgramas = (datos, index) => {
-        console.log(datos, index, 'boton de eliminar')
-    }
+
     return (
         <React.Fragment>
-            <div className="d-flex justify-content-center align-center flex-direction-columm" style={{ height: "100%" }}>
+            <div className="d-flex justify-content-center align-center flex-direction-columm" style={{ height: "100%", paddingTop: "7%" }}>
                 <Row className="box-select-content border-radius-10 box-shadow" style={{ padding: "2%" }}>
                     <Row style={{ width: "100%", padding: "2%" }} className="d-flex justify-content-center">
                         <Col span={4}>
-                            <Button type="primary" shape="round" icon={<LeftCircleOutlined />} >
+                            <Button type="primary" shape="round" icon={<LeftCircleOutlined />} onClick={() => gotoScreen("/Subdirector/")} >
                                 Salir
                             </Button>
                         </Col>
                         <Col span={16} className="d-flex justify-content-center">
-                            <span className="titulos">Programas académicos</span>
+                            <span className="titulos">Programas Académicos</span>
                         </Col>
                         <Col span={4}>
-                            <Button type="primary" shape="round" icon={<PlusOutlined />} >
-                                Crear programa
+                            <Button type="primary" shape="round" icon={<PlusOutlined />} onClick={() => gotoScreen("/Subdirector/CrearProgramasAcademicos")} >
+                                Crear Programa
                             </Button>
                         </Col>
                     </Row>
+
                     <Row style={{ width: "100%" }}>
-                        <Col span={12} className="select-space">
-                            <Input.Group>
-                                <Typography.Text>Tipo institución:</Typography.Text>
-                                <Select className="margin-left" defaultValue="Seleccione" style={{ width: 180 }}>
-                                    {stInstitucion ? (stInstitucion.map((data) =>
-                                        <Select.Option value={data.idTipoInstitucion} key={data.idTipoInstitucion}>{data.nombreInstitucion}</Select.Option>
-                                    )
-                                    ) : null}
-                                </Select>
-                            </Input.Group>
-                        </Col>
-                        <Col span={12} className="select-space">
-                            <Input.Group>
-                                <Typography.Text>Facultad:</Typography.Text>
-                                <Select className="margin-left" defaultValue="Seleccione" style={{ width: 180 }}>
-                                    {stFacultades ? (stFacultades.map((data) =>
-                                        <Select.Option value={data.idFacultad} key={data.idFacultad}>{data.nombreFacultad}</Select.Option>
-                                    )
-                                    ) : null}
-                                </Select>
-                            </Input.Group>
-                        </Col>
                         <Col span={24} className="select-space">
-                            <Table dataSource={stPrograma} columns={columnas} />
+                            {
+                                programas ? (<Table pagination={{ position: ["bottomRight"], pageSize: 4 }} columns={columnas} dataSource={programas} />) : null
+                            }
                         </Col>
                     </Row>
                 </Row>

@@ -1,7 +1,6 @@
-import React, { useState, useEffect, Component, state } from "react";
-import axios from "axios";
+import React, { useState} from "react";
 // CSS
-import { Row, Col, Input, Typography, Select, Button, Checkbox } from "antd";
+import { Row, Col, Input, Button, Form } from "antd";
 import { SaveOutlined, LeftCircleOutlined } from '@ant-design/icons';
 import { useHistory } from "react-router-dom";
 
@@ -12,86 +11,50 @@ export default function Crearsalon() {
         return history.push(screen);
     };
 
-    //nuevo codigo crear salon
-    const [salon, setsalon] = useState({
+    const [salon, setSalon] = useState({
         tipoSalon: '',
         capacidad: '',
         nomenclatura: ''
     });
 
-    const handlechange1 = e => {
-        setsalon({
+    const handleChange = e => {
+        setSalon({
             ...salon,
             [e.target.name]: e.target.value
         })
     }
 
-    //envio de datos
     const handleSubmit = () => {
-        console.log('ingreso todo');
-        //validación de datos
-        if(salon.tipoSalon === '' || salon.capacidad === '' || salon.nomenclatura === ''){
+        salon.tipoSalon = parseInt(salon.tipoSalon, 10);
+        //validación datos
+        if (salon.tipoSalon === '' || salon.capacidad === '' || salon.nomenclatura === '') {
             alert('Todos los campos son necesarios');
             return
         }
 
-        //consulta para enviar datos
+        //enviar datos
         const requestInit = {
-            method: 'post',
-            Headers: {'Content-Type': 'application/json'},
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(salon)
         }
         fetch('https://app-gestion-aunar.herokuapp.com/salones', requestInit)
-        .then(res => res.json())
-        .then(res => console.log(res))
+            .then(res => res.text())
+            .then(res => console.log(res))
+        alert('Guardado Exitosamente');
 
-        //reiniciando state del salon
-        setsalon({
+        setSalon({
             tipoSalon: '',
             capacidad: '',
             nomenclatura: ''
-        })
+        });
+
+        gotoScreen("/Subdirector/Salones")
     }
 
-    //State de salones 
-    const [stSalones, setSalones] = React.useState('');
-    const [stTipo, setTipo] = React.useState('');
-    const [stCapacidad, setCapacidad] = React.useState('');
-    const [stSalon, setSalon] = useState({
-        capacidad: '',
-        tipo: '',
-        nomeclatura: ''
-   })
-
-    useEffect(() => {
-
-        salonesApi();
-
-    }, []);
-
-    const salonesApi = async () => {
-
-        const salones = 'https://app-gestion-aunar.herokuapp.com/salones';
-        const resSalones = await axios.get(salones);
-        setSalones(resSalones.data);
-
-    }
-
-
-
-    function onChange(checkedValues) {
-        console.log('checked = ', checkedValues);
-    }
-
-    const handleChange = e =>{
-        console.log('hola mudno');
-        stSalon({
-            [e.target.name]: e.target.value
-        })
-    }
     return (
         <React.Fragment>
-           <div className="d-flex justify-content-center align-center flex-direction-columm" style={{ height: "100%" }}>
+            <div className="d-flex justify-content-center align-center flex-direction-columm" style={{ height: "100%" }}>
                 <Row className="box-select-content border-radius-10 box-shadow" style={{ padding: "2%" }}>
                     <Row style={{ width: "100%", padding: "2%" }} className="d-flex justify-content-center">
                         <Col span={4}>
@@ -105,33 +68,28 @@ export default function Crearsalon() {
                         <Col span={4}></Col>
                     </Row>
                     <Row style={{ width: "100%" }}>
-                        <Col span={6} className="select-space">
-                            <Input.Group>
-                                <Typography.Text>Tipo:</Typography.Text>
-                                <Select className="margin-left" defaultValue="Seleccione" style={{ width: 150 }}>
-                                    {stSalones ? (stSalones.map((data) =>
-                                        <Select.Option value={data.tipoSalon} key={data.idSalon} name={data.tipoSalon} onChange={handlechange1}>{data.tipoSalon}</Select.Option>
-                                    )
-                                    ) : null}
-                                </Select>
-                            </Input.Group>
-                        </Col>
-                        <Col span={5} className="select-space">
-                            <Input.Group  style={{ display: 'flex', flexDirection: 'row' }} onChange={handlechange1} name="capacidad" value='capacidad' type="text" id="capacidad">
-                                <Typography.Text>Capacidad:</Typography.Text>
-                                <Input />
-                            </Input.Group>
-                        </Col>
-                        <Col span={5} className="select-space">
-                            <Input.Group name="nomenclatura" value="nomenclatura" type="text" id="nomenclatura" style={{ display: 'flex', flexDirection: 'row' }} onChange={handlechange1}>
-                                <Typography.Text >Nomenclatura:</Typography.Text>
-                                <Input />
-                            </Input.Group>
-                        </Col>
-                        <Col span={2} style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }} onSubmit={handleSubmit}>
-                            <SaveOutlined className="font-size-18" />
-                           <boton type="submit">Guardar</boton>
-                        </Col>
+                        <Form layout="inline">
+
+                            <Form.Item label="Tipo Salón" span={8} className="select-space">
+                                <select name="tipoSalon" style={{ width: 120 }} onChange={handleChange}>
+                                    <option value="1">Salon normal</option>
+                                    <option value="2">Sala de Sistemas</option>
+                                </select>
+                            </Form.Item>
+
+                            <Form.Item label="Capacidad del Salón" span={8} className="select-space">
+                                <Input placeholder="20 - 30" onChange={handleChange} name="capacidad" value={salon.capacidad} />
+                            </Form.Item>
+
+                            <Form.Item label="Nomenclatura del Salón" span={8} className="select-space">
+                                <Input placeholder="105" onChange={handleChange} name="nomenclatura" value={salon.nomenclatura} />
+                            </Form.Item>
+                            
+                            <Col span={8} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                                <SaveOutlined className="font-size-18" onClick={handleSubmit} />
+                                <span>Guardar</span>
+                            </Col>
+                        </Form>
                     </Row>
                 </Row>
             </div>
