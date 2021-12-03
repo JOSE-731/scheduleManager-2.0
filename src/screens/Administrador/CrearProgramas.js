@@ -48,9 +48,6 @@ export default function Crearprogramas() {
     const handleSubmit = () => {
         programa.numSemestres = parseInt(programa.numSemestres, 10);
         programa.codPrograma = parseInt(programa.codPrograma, 10);
-        programa.jornada1 = parseInt(programa.jornada1, 10);
-        programa.jornada2 = parseInt(programa.jornada2, 10);
-        programa.jornada3 = parseInt(programa.jornada3, 10);
         programa.Facultad_idFacultad = parseInt(programa.Facultad_idFacultad, 10);
         programa.Facultad_TipoInstitucion_idTipoInstitucion = parseInt(programa.Facultad_TipoInstitucion_idTipoInstitucion, 10);
         //validación datos
@@ -74,9 +71,9 @@ export default function Crearprogramas() {
             nombrePrograma: '',
             numSemestres: '',
             codPrograma: '',
-            jornada1: '0',
-            jornada2: '0',
-            jornada3: '0',
+            jornada1: '',
+            jornada2: '',
+            jornada3: '',
             Facultad_idFacultad: '',
             Facultad_TipoInstitucion_idTipoInstitucion: '',
             Facultad_TipoInstitucion_PlanesAcademicos_idPlanAcademico: 1
