@@ -4,7 +4,7 @@ import { Row, Col, Input, Button, Form } from "antd";
 import { SaveOutlined, LeftCircleOutlined } from '@ant-design/icons';
 import { useHistory } from "react-router-dom";
 
-export default function Crearsalon() {
+export default function Crearsalones() {
 
     const history = useHistory();
     const gotoScreen = (screen) => {
@@ -49,7 +49,7 @@ export default function Crearsalon() {
             nomenclatura: ''
         });
 
-        gotoScreen("/Subdirector/Salones")
+        gotoScreen("/Administrador1/Salones")
     }
 
     return (
@@ -58,7 +58,7 @@ export default function Crearsalon() {
                 <Row className="box-select-content border-radius-10 box-shadow" style={{ padding: "2%" }}>
                     <Row style={{ width: "100%", padding: "2%" }} className="d-flex justify-content-center">
                         <Col span={4}>
-                            <Button type="primary" shape="round" icon={<LeftCircleOutlined />} onClick={() => gotoScreen("/Subdirector")}>
+                            <Button type="primary" shape="round" icon={<LeftCircleOutlined />} onClick={() => gotoScreen("/Administrador1/Salones")}>
                                 Salir
                             </Button>
                         </Col>

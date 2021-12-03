@@ -4,7 +4,7 @@ import { Row, Col, Table, Button } from "antd";
 import { DeleteOutlined, EditOutlined, PlusOutlined, LeftCircleOutlined } from '@ant-design/icons';
 import { useHistory } from "react-router-dom";
 
-export default function Usuario() {
+export default function Usuarios() {
 
   // COLUMNAS DE LAS TABLAS
   const history = useHistory();
@@ -96,7 +96,7 @@ export default function Usuario() {
         <Row className="box-select-content border-radius-10 box-shadow" style={{ padding: "2%" }}>
           <Row style={{ width: "100%", padding: "2%" }} className="d-flex justify-content-center">
             <Col span={4}>
-              <Button type="primary" shape="round" icon={<LeftCircleOutlined />} onClick={() => gotoScreen("/Subdirector")}>
+              <Button type="primary" shape="round" icon={<LeftCircleOutlined />} onClick={() => gotoScreen("/Administrador1/")}>
                 Salir
               </Button>
             </Col>
@@ -104,7 +104,7 @@ export default function Usuario() {
               <span className="titulos">Usuarios</span>
             </Col>
             <Col span={4}>
-              <Button type="primary" shape="round" icon={<PlusOutlined />} onClick={() => gotoScreen("/Subdirector/CrearUsuarios")}>
+              <Button type="primary" shape="round" icon={<PlusOutlined />} onClick={() => gotoScreen("/Administrador1/CrearUsuarios")}>
                 Crear usuario
               </Button>
             </Col>

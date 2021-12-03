@@ -1,46 +1,50 @@
 import React from "react";
 import { Route, BrowserRouter as Router } from "react-router-dom";
 // SCREENS
-import CoordinadorHome from "../screens/Coordinadores/CoordHome";
-import PlaneacionAcademica from "../screens/Coordinadores/Planesacademicosperiodo";
-import PeriodoPlan from "../screens/Coordinadores/PeriodoPlan";
-import Usuarios from "../screens/Coordinadores/Usuarios";
-import Crearusuario from "../screens/Coordinadores/CreateUser";
-import CreateUsers from "../screens/Coordinadores/CreateUser";
-import VerPlanAcademico from "../screens/Coordinadores/VerPlanAcademico";
-import Actualizarusuarios from "../screens/Coordinadores/Actualizarusuario";
+import CordHome from "../screens/Coordinador/CordHome";
+import Actualizarusuario from "../screens/Coordinador/Actualizarusuario";
+import CrearDocentes from "../screens/Coordinador/CrearDocentes";
+import CrearperidoPlan from "../screens/Coordinador/CrearperiodoPlan";
+import Docentes from "../screens/Coordinador/Docentes";
+import PeriodoPlan from "../screens/Coordinador/PeriodoPlan";
+import CrearAsignación from "../screens/Coordinador/CrearAsingación";
+import Verplanesacademicos from "../screens/Coordinador/Verplanesacademicos";
 
 
 // COMPONENTS
 import Navbar from "../components/Navbar";
+import CreateUser from "../screens/Login/CreateUser";
 
 export default function CoordinadorRouter() {
   return (
     <React.Fragment>
       <Navbar />
       <Route exact path="/Coordinador/">
-        <CoordinadorHome />
+        <CordHome />
+      </Route>
+      <Route exact path="/Coordinador/Actualizarusuario">
+        <Actualizarusuario />
+      </Route>
+      <Route exact path="/Coordinador/CrearDocentes">
+        <CrearDocentes />
+      </Route>
+      <Route exact path="/Coordinador/Crearperioplan">
+        <CrearperidoPlan />
+      </Route>
+      <Route exact path="/Coordinador/Docentes">
+        <Docentes />
       </Route>
       <Route exact path="/Coordinador/PeriodoPlan">
         <PeriodoPlan />
       </Route>
-      <Route exact path="/Coordinador/VerPlanAcademico">
-        <VerPlanAcademico />
+      <Route exact path="/Coordinador/CrearAignacion">
+        <CrearAsignación />
       </Route>
-      <Route exact path="/Coordinador/PlaneacionAcademica">
-        <PlaneacionAcademica />
-      </Route>
-      <Route exact path="/Coordinador/Usuarios">
-       <Usuarios/>
-      </Route>
-      <Route exact path="/Coordinador/CrearUsuarios">
-        <Crearusuario />
-      </Route>
-      <Route exact path="/Coordinador/ActualizarUsuarios">
-        <Actualizarusuarios />
+      <Route exact path="/Coordinador/Verplanesacademicos">
+        <Verplanesacademicos />
       </Route>
       <Route exact path="/Coordinador/Createuser">
-       <CreateUsers/>
+       <CreateUser/>
       </Route>
     </React.Fragment>
   );

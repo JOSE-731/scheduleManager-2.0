@@ -48,7 +48,7 @@ const dataS = [
 
 ];
 
-export default function PlaneacionAcademica() {
+export default function CrearAsignación() {
 
   //State de la apis que se consumen
   const [stInstitucion, setInstitucion] = React.useState('');

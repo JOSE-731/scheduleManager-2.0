@@ -7,8 +7,8 @@ import ValidarUser from "../screens/Login/ValidationPassword";
 import CreatePassword from "../screens/Login/CreatePassword";
 import ChangePassword from "../screens/Login/ChangePassword";
 // ADMIN ROUTER
-import AdminRouter from "./AdminRouter";
-import SubdirectoresRouter from "./SubdirectoresRouter";
+import CordRouter from "./CoordinadorRouter";
+import AdministradorRouter from "./AdministradorRouter";
 // ANT-DESIGN
 import { Layout } from "antd";
 
@@ -18,11 +18,11 @@ export default function LoginRouter() {
       <div style={{ height:'100%', width: '100%', backgroundColor: 'rgba(0, 0, 0, 0.6)' }}>
         <Router>
           <Switch>
-            <Route path="/Administrador/">
-              <AdminRouter />
+            <Route path="/Coordinador/">
+              <CordRouter />
             </Route>
-            <Route path="/Subdirector/">
-              <SubdirectoresRouter />
+            <Route path="/Administrador1/">
+              <AdministradorRouter />
             </Route>
             <Route path="/Olvidastecontraseña">
               <ValidarUser />

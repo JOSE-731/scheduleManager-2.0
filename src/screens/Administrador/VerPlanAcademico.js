@@ -62,7 +62,7 @@ export default function VerPlanAcademico() {
                 <Row className="box-select-content border-radius-10 box-shadow" style={{ padding: "2%" }}>
                     <Row style={{ width: "100%", padding: "2%" }} className="d-flex justify-content-center">
                         <Col span={4}>
-                            <Button type="primary" shape="round"  icon={<LeftCircleOutlined />}  onClick={() => gotoScreen("/Subdirector/")} >
+                            <Button type="primary" shape="round"  icon={<LeftCircleOutlined />}  onClick={() => gotoScreen("/Administrador1/")} >
                                 Salir
                             </Button>
                         </Col>

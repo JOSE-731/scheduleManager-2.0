@@ -7,7 +7,7 @@ import { withRouter } from "react-router-dom"
 import { Row, Col } from "antd";
 import { BookOutlined, UsergroupAddOutlined } from "@ant-design/icons";
 
-const  AdminHome = (props) => {
+const  CordHome = (props) => {
   const history = useHistory();
   const gotoScreen = (screen) => {
     return history.push(screen);
@@ -29,7 +29,7 @@ const  AdminHome = (props) => {
         <Col span={12} style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
           <BookOutlined
             className="font-size-100 justify-content-center font-color-FFFFFF"
-            onClick={() => gotoScreen("/Administrador/PeriodoPlan")}
+            onClick={() => gotoScreen("/Coordinador/PeriodoPlan")}
             label="Planes académicos"
           />
           <span className="d-flex no-margin justify-content-center font-color-FFFFFF">Planes Académicos</span>
@@ -37,14 +37,14 @@ const  AdminHome = (props) => {
         <Col span={12} style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
           <UsergroupAddOutlined
             className="font-size-100 justify-content-center font-color-FFFFFF"
-            onClick={() => gotoScreen("/Administrador/Usuarios")}
-            label="usuarios"
+            onClick={() => gotoScreen("/Coordinador/Docentes")}
+            label="Docentes"
           />
-          <span className="d-flex no-margin justify-content-center font-color-FFFFFF">Usuarios</span>
+          <span className="d-flex no-margin justify-content-center font-color-FFFFFF">Docentes</span>
         </Col>
       </Row>
     </div>
   );
 }
 
-export default withRouter(AdminHome)
+export default withRouter(CordHome)

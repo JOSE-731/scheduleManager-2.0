@@ -82,7 +82,7 @@ export default function Crearprogramas() {
             Facultad_TipoInstitucion_PlanesAcademicos_idPlanAcademico: 1
         });
 
-        gotoScreen("/Subdirector/Programas")
+        gotoScreen("/Administrador1/Programas")
     }
 
     return (
@@ -91,7 +91,7 @@ export default function Crearprogramas() {
                 <Row className="box-select-content border-radius-10 box-shadow" style={{ padding: "2%" }}>
                     <Row style={{ width: "100%", padding: "2%" }} className="d-flex justify-content-center">
                         <Col span={4}>
-                            <Button type="primary" shape="round" icon={<LeftCircleOutlined />} onClick={() => gotoScreen("/Subdirector/Programas")}>
+                            <Button type="primary" shape="round" icon={<LeftCircleOutlined />} onClick={() => gotoScreen("/Administrador1/Programas")}>
                                 Salir
                             </Button>
                         </Col>

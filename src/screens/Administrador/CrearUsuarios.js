@@ -5,7 +5,7 @@ import { SaveOutlined, LeftCircleOutlined } from '@ant-design/icons';
 import { useHistory } from "react-router-dom";
 
 
-export default function Crearusuario() {
+export default function CrearUsuarios() {
   
   const history = useHistory();
   const gotoScreen = (screen) => {
@@ -62,7 +62,7 @@ export default function Crearusuario() {
       Roles_idRol: 0
     });
 
-    gotoScreen("/Subdirector/Usuarios")
+    gotoScreen("/Administrador1/Usuarios")
   }
 
   return (
@@ -71,7 +71,7 @@ export default function Crearusuario() {
         <Row className="box-select-content border-radius-10 box-shadow" style={{ padding: "2%" }}>
           <Row style={{ width: "100%", padding: "2%" }} className="d-flex justify-content-center">
             <Col span={4}>
-              <Button type="primary" shape="round" icon={<LeftCircleOutlined />} onClick={() => gotoScreen("/Subdirector/")}>
+              <Button type="primary" shape="round" icon={<LeftCircleOutlined />} onClick={() => gotoScreen("/Administrador1/Usuarios/")}>
                 Salir
               </Button>
             </Col>

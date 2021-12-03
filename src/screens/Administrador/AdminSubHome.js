@@ -4,7 +4,7 @@ import { useHistory } from "react-router-dom";
 import { Row, Col } from "antd";
 import { FilePptOutlined, HomeOutlined} from "@ant-design/icons";
 
-export default function SubdirectorsubHome() {
+export default function AdminSubbHome() {
     const history = useHistory();
     const gotoScreen = (screen) => {
         return history.push(screen);
@@ -15,7 +15,7 @@ export default function SubdirectorsubHome() {
                 <Col span={12} style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
                     <FilePptOutlined
                     className="font-size-100 justify-content-center font-color-FFFFFF" 
-                    onClick={() => gotoScreen("/Subdirector/Programas")}
+                    onClick={() => gotoScreen("/Administrador1/Programas")}
                     label="Planes académicos"
                     />
                     <span className="d-flex no-margin justify-content-center font-color-FFFFFF">Programas</span>
@@ -23,7 +23,7 @@ export default function SubdirectorsubHome() {
                 <Col span={12} style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
                     <HomeOutlined
                     className="font-size-100 justify-content-center font-color-FFFFFF" 
-                    onClick={() => gotoScreen("/Subdirector/Salones")}
+                    onClick={() => gotoScreen("/Administrador1/Salones")}
                     label="usuarios"
                     />
                     <span className="d-flex no-margin justify-content-center font-color-FFFFFF">Salones</span>

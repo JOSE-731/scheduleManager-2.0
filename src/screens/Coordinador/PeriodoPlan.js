@@ -17,7 +17,7 @@ const dataS = [
   },
 ];
 
-export default function VerperiodoPlan() {
+export default function PeriodoPlan() {
   const history = useHistory();
   const gotoScreen = (screen) => {
     return history.push(screen);
@@ -75,7 +75,7 @@ export default function VerperiodoPlan() {
         <Row className="box-select-content border-radius-10 box-shadow" style={{ padding: "2%" }}>
           <Row style={{ width: "100%", padding: "2%" }} className="d-flex justify-content-center">
             <Col span={4}>
-              <Button type="primary" shape="round" icon={<LeftCircleOutlined />} onClick={() => gotoScreen("/Administrador")}>
+              <Button type="primary" shape="round" icon={<LeftCircleOutlined />} onClick={() => gotoScreen("/Coordinador/")}>
                 Salir
               </Button>
             </Col>
@@ -83,8 +83,8 @@ export default function VerperiodoPlan() {
               <span className="titulos">Planes academicos</span>
             </Col>
             <Col span={4}>
-              <Button type="primary" shape="round" icon={<PlusOutlined />} onClick={() => gotoScreen("/Administrador/PlaneacionAcademica")}>
-                Crear plan academico
+              <Button type="primary" shape="round" icon={<PlusOutlined />} onClick={() => gotoScreen("/Coordinador/CrearAignacion")}>
+                Crear Asignación
               </Button>
             </Col>
           </Row>

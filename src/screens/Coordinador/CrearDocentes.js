@@ -6,7 +6,7 @@ import { SaveOutlined, LeftCircleOutlined } from '@ant-design/icons';
 import { useHistory } from "react-router-dom";
 
 
-export default function Crearusuarios() {
+export default function CrearDocentes() {
   const history = useHistory();
 
    //State de roles
@@ -35,12 +35,12 @@ export default function Crearusuarios() {
         <Row className="box-select-content border-radius-10 box-shadow" style={{ padding: "2%" }}>
           <Row style={{ width: "100%", padding: "2%" }} className="d-flex justify-content-center">
             <Col span={4}>
-              <Button type="primary" shape="round" icon={<LeftCircleOutlined />} onClick={() => gotoScreen("/Administrador/")}>
+              <Button type="primary" shape="round" icon={<LeftCircleOutlined />} onClick={() => gotoScreen("/Coordinador/Docentes")}>
                 Salir
               </Button>
             </Col>
             <Col span={16} className="d-flex justify-content-center">
-              <span className="titulos">Crear usuarios</span>
+              <span className="titulos">Crear Docente</span>
             </Col>
             <Col span={4}></Col>
           </Row>
