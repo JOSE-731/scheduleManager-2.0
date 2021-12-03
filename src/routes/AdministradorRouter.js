@@ -11,7 +11,9 @@ import CrearUsuarios from "../screens/Administrador/CrearUsuarios"
 import Programas from "../screens/Administrador/Programas"
 import Salones from "../screens/Administrador/Salones"
 import Usuarios from "../screens/Administrador/Usuarios";
-import VerPlanAcademico from "../screens/Administrador/VerPlanAcademico"
+import Verplanesacademicos from "../screens/Administrador/Verplanesacademicos"
+import PeriodoPlan from "../screens/Administrador/PeriodoPlan";
+import CrearAsignacion from "../screens/Administrador/CrearAsignacion";
 
 // COMPONENTS
 import Navbar from "../components/Navbar";
@@ -21,32 +23,38 @@ export default function AdministradorRouter() {
   return (
     <React.Fragment>
       <Navbar />
-      <Route exact path="/Administrador1/">
+      <Route exact path="/Administrador/">
         <AdminHome />
       </Route>
-      <Route exact path="/Administrador1/AdminSubHome">
+      <Route exact path="/Administrador/AdminSubHome">
         <AdminSubHome />
       </Route>
-      <Route exact path="/Administrador1/CrearProgramas">
+      <Route exact path="/Administrador/CrearProgramas">
         <CrearProgramas />
       </Route>
-      <Route exact path="/Administrador1/CrearSalones">
+      <Route exact path="/Administrador/CrearSalones">
         <CrearSalones />
       </Route>
-      <Route exact path="/Administrador1/CrearUsuarios">
+      <Route exact path="/Administrador/CrearUsuarios">
         <CrearUsuarios/>
       </Route>
-      <Route exact path="/Administrador1/Programas">
+      <Route exact path="/Administrador/Programas">
         <Programas />
       </Route>
-      <Route exact path="/Administrador1/Salones">
+      <Route exact path="/Administrador/Salones">
         <Salones />
       </Route>
-      <Route exact path="/Administrador1/Usuarios">
+      <Route exact path="/Administrador/Usuarios">
         <Usuarios />
       </Route>
-      <Route exact path="/Administrador1/VerPlanAcademico">
-        <VerPlanAcademico />
+      <Route exact path="/Administrador/VerAsignaciones">
+        <Verplanesacademicos />
+      </Route>
+      <Route exact path="/Administrador/PeriodoPlan">
+        <PeriodoPlan />
+      </Route>
+      <Route exact path="/Administrador/CrearAsignacion">
+        <CrearAsignacion />
       </Route>
     </React.Fragment>
   );

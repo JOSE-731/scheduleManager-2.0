@@ -7,7 +7,7 @@ import CrearDocentes from "../screens/Coordinador/CrearDocentes";
 import CrearperidoPlan from "../screens/Coordinador/CrearperiodoPlan";
 import Docentes from "../screens/Coordinador/Docentes";
 import PeriodoPlan from "../screens/Coordinador/PeriodoPlan";
-import CrearAsignación from "../screens/Coordinador/CrearAsingación";
+import CrearAsignacion from "../screens/Coordinador/CrearAsignacion";
 import Verplanesacademicos from "../screens/Coordinador/Verplanesacademicos";
 
 
@@ -37,8 +37,8 @@ export default function CoordinadorRouter() {
       <Route exact path="/Coordinador/PeriodoPlan">
         <PeriodoPlan />
       </Route>
-      <Route exact path="/Coordinador/CrearAignacion">
-        <CrearAsignación />
+      <Route exact path="/Coordinador/CrearAsignacion">
+        <CrearAsignacion />
       </Route>
       <Route exact path="/Coordinador/Verplanesacademicos">
         <Verplanesacademicos />

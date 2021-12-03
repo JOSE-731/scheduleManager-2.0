@@ -1,6 +1,6 @@
-import React, { useState} from "react";
+import React, { useState } from "react";
 // CSS
-import { Row, Col, Input, Button, Form } from "antd";
+import { Row, Col, Input, Button, Form, Modal, Select } from "antd";
 import { SaveOutlined, LeftCircleOutlined } from '@ant-design/icons';
 import { useHistory } from "react-router-dom";
 
@@ -10,6 +10,8 @@ export default function Crearsalones() {
     const gotoScreen = (screen) => {
         return history.push(screen);
     };
+
+    const { Option } = Select;
 
     const [salon, setSalon] = useState({
         tipoSalon: '',
@@ -21,6 +23,13 @@ export default function Crearsalones() {
         setSalon({
             ...salon,
             [e.target.name]: e.target.value
+        })
+    }
+
+    const handleChangeTipoSalon = e => {
+        setSalon({
+            ...salon,
+            tipoSalon: e
         })
     }
 
@@ -41,7 +50,6 @@ export default function Crearsalones() {
         fetch('https://app-gestion-aunar.herokuapp.com/salones', requestInit)
             .then(res => res.text())
             .then(res => console.log(res))
-        alert('Guardado Exitosamente');
 
         setSalon({
             tipoSalon: '',
@@ -49,7 +57,12 @@ export default function Crearsalones() {
             nomenclatura: ''
         });
 
-        gotoScreen("/Administrador1/Salones")
+        Modal.info({
+            title: "Salón Creado con Exito",
+            onOk: () => {
+                gotoScreen("/Administrador/Salones")
+            }
+        });
     }
 
     return (
@@ -58,7 +71,7 @@ export default function Crearsalones() {
                 <Row className="box-select-content border-radius-10 box-shadow" style={{ padding: "2%" }}>
                     <Row style={{ width: "100%", padding: "2%" }} className="d-flex justify-content-center">
                         <Col span={4}>
-                            <Button type="primary" shape="round" icon={<LeftCircleOutlined />} onClick={() => gotoScreen("/Administrador1/Salones")}>
+                            <Button type="primary" shape="round" icon={<LeftCircleOutlined />} onClick={() => gotoScreen("/Administrador/Salones")}>
                                 Salir
                             </Button>
                         </Col>
@@ -71,10 +84,10 @@ export default function Crearsalones() {
                         <Form layout="inline">
 
                             <Form.Item label="Tipo Salón" span={8} className="select-space">
-                                <select name="tipoSalon" style={{ width: 120 }} onChange={handleChange}>
-                                    <option value="1">Salon normal</option>
-                                    <option value="2">Sala de Sistemas</option>
-                                </select>
+                                <Select className="margin-left" defaultValue="Seleccione" style={{ width: 150 }} onChange={handleChangeTipoSalon}>
+                                    <Option value="1" >Salón Normal</Option>
+                                    <Option value="2" >Salón de Sistemas</Option>
+                                </Select>
                             </Form.Item>
 
                             <Form.Item label="Capacidad del Salón" span={8} className="select-space">
@@ -84,8 +97,8 @@ export default function Crearsalones() {
                             <Form.Item label="Nomenclatura del Salón" span={8} className="select-space">
                                 <Input placeholder="105" onChange={handleChange} name="nomenclatura" value={salon.nomenclatura} />
                             </Form.Item>
-                            
-                            <Col span={8} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+
+                            <Col span={24} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
                                 <SaveOutlined className="font-size-18" onClick={handleSubmit} />
                                 <span>Guardar</span>
                             </Col>

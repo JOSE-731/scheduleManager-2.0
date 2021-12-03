@@ -21,7 +21,7 @@ export default function PeriodoPlan() {
       render: (datos) => (
         <Row>
           <Col>
-            <Button shape="circle" icon={<EyeOutlined />} onClick={() => gotoScreen("/Coordinador/Verplanesacademicos")}/>
+            <Button shape="circle" icon={<EyeOutlined />} onClick={() => gotoScreen("/Administrador/VerAsignaciones")}/>
           </Col>
         </Row>
       )
@@ -99,7 +99,7 @@ export default function PeriodoPlan() {
         <Row className="box-select-content border-radius-10 box-shadow" style={{ padding: "2%" }}>
           <Row style={{ width: "100%", padding: "2%" }} className="d-flex justify-content-center">
             <Col span={4}>
-              <Button type="primary" shape="round" icon={<LeftCircleOutlined />} onClick={() => gotoScreen("/Coordinador/")}>
+              <Button type="primary" shape="round" icon={<LeftCircleOutlined />} onClick={() => gotoScreen("/Administrador/")}>
                 Salir
               </Button>
             </Col>
@@ -107,7 +107,7 @@ export default function PeriodoPlan() {
               <span className="titulos">Planes academicos</span>
             </Col>
             <Col span={4}>
-              <Button type="primary" shape="round" icon={<PlusOutlined />} onClick={() => gotoScreen("/Coordinador/CrearAsignacion")}>
+              <Button type="primary" shape="round" icon={<PlusOutlined />} onClick={() => gotoScreen("/Administrador/CrearAsignacion")}>
                 Crear Asignación
               </Button>
             </Col>

@@ -15,7 +15,7 @@ export default function AdminHome() {
                 <Col span={8} style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
                     <BookOutlined
                     className="font-size-100 justify-content-center font-color-FFFFFF" 
-                    onClick={() => gotoScreen("/Administrador1/VerPlanAcademico")}
+                    onClick={() => gotoScreen("/Administrador/PeriodoPlan")}
                     label="Planes académicos"
                     />
                     <span className="d-flex no-margin justify-content-center font-color-FFFFFF">Planes Académicos</span>
@@ -23,7 +23,7 @@ export default function AdminHome() {
                 <Col span={8} style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
                     <UsergroupAddOutlined
                     className="font-size-100 justify-content-center font-color-FFFFFF" 
-                    onClick={() => gotoScreen("/Administrador1/Usuarios")}
+                    onClick={() => gotoScreen("/Administrador/Usuarios")}
                     label="usuarios"
                     />
                     <span className="d-flex no-margin justify-content-center font-color-FFFFFF">Usuarios</span>
@@ -31,7 +31,7 @@ export default function AdminHome() {
                 <Col span={8} style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
                     <BankOutlined
                     className="font-size-100 justify-content-center font-color-FFFFFF" 
-                    onClick={() => gotoScreen("/Administrador1/AdminSubHome")}
+                    onClick={() => gotoScreen("/Administrador/AdminSubHome")}
                     label="Gestio de clases"
                     />
                     <span className="d-flex no-margin justify-content-center font-color-FFFFFF">Gestión de Clases</span>

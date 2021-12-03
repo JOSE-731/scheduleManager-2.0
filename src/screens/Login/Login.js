@@ -66,8 +66,12 @@ const Login = (props) => {
       //Redirigir
       if (email == "test2@test2.com") {
         props.history.push('/Coordinador/')
-      } else {
-        props.history.push('/Administrador1/')
+      } 
+      else if (email == "resgitro@test3.com") {
+        props.history.push('/Registro_y_Control/')
+      }
+      else{
+        props.history.push('/Administrador/')
       }
 
     } catch (error) {

@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
 // CSS
-import { Row, Col, Input, Typography, Button, Form } from "antd";
+import { Row, Col, Input, Typography, Button, Form, Modal, Select } from "antd";
 import { SaveOutlined, LeftCircleOutlined } from '@ant-design/icons';
 import { useHistory } from "react-router-dom";
 
 
 export default function CrearUsuarios() {
-  
+
   const history = useHistory();
   const gotoScreen = (screen) => {
     return history.push(screen);
@@ -36,6 +36,13 @@ export default function CrearUsuarios() {
     })
   }
 
+  const handleChangeRol = e => {
+    setUsuario({
+      ...usuario,
+      Roles_idRol: e
+    })
+  }
+
   const handleSubmit = () => {
     usuario.Roles_idRol = parseInt(usuario.Roles_idRol, 10);
     //validación datos
@@ -53,7 +60,6 @@ export default function CrearUsuarios() {
     fetch('https://app-gestion-aunar.herokuapp.com/usuarios', requestInit)
       .then(res => res.text())
       .then(res => console.log(res))
-    alert('Guardado Exitosamente');
 
     setUsuario({
       nombreUsuario: '',
@@ -62,7 +68,12 @@ export default function CrearUsuarios() {
       Roles_idRol: 0
     });
 
-    gotoScreen("/Administrador1/Usuarios")
+    Modal.info({
+      title: "Usuario Creado con Exito",
+      onOk: () => {
+        gotoScreen("/Administrador/Usuarios")
+      }
+    });
   }
 
   return (
@@ -71,7 +82,7 @@ export default function CrearUsuarios() {
         <Row className="box-select-content border-radius-10 box-shadow" style={{ padding: "2%" }}>
           <Row style={{ width: "100%", padding: "2%" }} className="d-flex justify-content-center">
             <Col span={4}>
-              <Button type="primary" shape="round" icon={<LeftCircleOutlined />} onClick={() => gotoScreen("/Administrador1/Usuarios/")}>
+              <Button type="primary" shape="round" icon={<LeftCircleOutlined />} onClick={() => gotoScreen("/Administrador/Usuarios/")}>
                 Salir
               </Button>
             </Col>
@@ -95,26 +106,28 @@ export default function CrearUsuarios() {
                 <Input placeholder="diana.escobar@aunarvillavicencio.edu.co" onChange={handleChange} name="correo" value={usuario.correo} />
               </Form.Item>
 
-              <Form.Item label="Tipo Usuario" span={8} className="select-space">
-                <select name="Roles_idRol" style={{ width: 120 }} onChange={handleChange}>
+              <Form.Item label="Tipo Institución" span={8} className="select-space">
+                <Select className="margin-left" defaultValue="Seleccione" style={{ width: 150 }} onChange={handleChangeRol}>
                   {
                     roles ? (roles.map((data) =>
-                      <option value={data.idRol}>{data.nombreRol}</option>
+                      <Select.Option value={data.idRol}>{data.nombreRol}</Select.Option>
                     )) : null
                   }
-                </select>
+                </Select>
               </Form.Item>
-
-              <Col span={4} style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
-                <SaveOutlined className="font-size-18" onClick={handleSubmit} />
-                <span>Guardar</span>
-              </Col>
 
               <Col span={24} className="margin-left-2">
                 <Typography.Paragraph>
                   Nota: Tenga en cuenta que para el ingreso al sistema, debe ingresar en "Usuario" el correo institucional y la "contraseña" es Aunar.123, Recuerde cambiar la contraseña la primera vez que ingrese al sistema para mayor seguridad de la información.
                 </Typography.Paragraph>
               </Col>
+
+              <Col span={23} style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
+                <SaveOutlined className="font-size-18" onClick={handleSubmit} />
+                <span>Guardar</span>
+              </Col>
+
+              
             </Form>
           </Row>
         </Row>

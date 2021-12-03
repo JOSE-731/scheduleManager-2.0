@@ -21,7 +21,7 @@ const  CordHome = (props) => {
       console.log('no existe');
       props.history.push('/')
     }
-  }, [])
+  },[])
 
   return (
     <div className="d-flex align-center justify-content-center flex-direction-columm" style={{ height: "100%" }}>

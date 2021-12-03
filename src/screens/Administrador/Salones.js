@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 
 // CSS
-import { Row, Col, Table, Button} from "antd";
+import { Row, Col, Table, Button, Modal} from "antd";
 import { DeleteOutlined, EditOutlined, PlusOutlined, LeftCircleOutlined } from '@ant-design/icons';
 import { useHistory } from "react-router-dom";
 
@@ -61,15 +61,20 @@ export default function Salones() {
     }, [listactualizada])
 
     const handleDelete = id => {
-        const requestInit = {
-            method: 'DELETE'
-        }
-        fetch('https://app-gestion-aunar.herokuapp.com/salones/' + id, requestInit)
-            .then(res => res.text())
-            .then(res => console.log(res))
-        alert('Eliminado Exitosamente');
-
-        setListaactualizada(true);
+        Modal.confirm({
+            title: "Estas seguro de eliminar el Salón",
+            okText: "Si",
+            okType: "danger",
+            onOk: () => {
+                const requestInit = {
+                    method: 'DELETE'
+                }
+                fetch('https://app-gestion-aunar.herokuapp.com/salones/' + id, requestInit)
+                    .then(res => res.text())
+                    .then(res => console.log(res))
+                setListaactualizada(true);
+            }
+        });
     }
 
     const handleUpdate = id => {
@@ -92,7 +97,7 @@ export default function Salones() {
                 <Row className="box-select-content border-radius-10 box-shadow" style={{ padding: "2%" }}>
                     <Row style={{ width: "100%", padding: "2%" }} className="d-flex justify-content-center">
                         <Col span={4}>
-                            <Button type="primary" shape="round" icon={<LeftCircleOutlined />} onClick={() => gotoScreen("/Administrador1/")} >
+                            <Button type="primary" shape="round" icon={<LeftCircleOutlined />} onClick={() => gotoScreen("/Administrador/")} >
                                 Salir
                             </Button>
                         </Col>
@@ -100,7 +105,7 @@ export default function Salones() {
                             <span className="titulos">Salones</span>
                         </Col>
                         <Col span={4}>
-                            <Button type="primary" shape="round" icon={<PlusOutlined />} onClick={() => gotoScreen("/Administrador1/CrearSalones")} >
+                            <Button type="primary" shape="round" icon={<PlusOutlined />} onClick={() => gotoScreen("/Administrador/CrearSalones")} >
                                 Crear Salon
                             </Button>
                         </Col>

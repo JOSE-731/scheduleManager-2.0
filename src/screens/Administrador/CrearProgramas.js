@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 
 // CSS
-import { Row, Col, Input, Space, Button, Checkbox, Form } from "antd";
+import { Row, Col, Input, Space, Button, Checkbox, Form, Modal, Select } from "antd";
 import { SaveOutlined, LeftCircleOutlined } from '@ant-design/icons';
 import { useHistory } from "react-router-dom";
 
@@ -45,6 +45,20 @@ export default function Crearprogramas() {
         })
     }
 
+    const handleChangeFacultad = e => {
+        setPrograma({
+            ...programa,
+            Facultad_idFacultad: e
+        })
+    }
+
+    const handleChangeInstitucion = e => {
+        setPrograma({
+            ...programa,
+            Facultad_TipoInstitucion_idTipoInstitucion: e
+        })
+    }
+
     const handleSubmit = () => {
         programa.numSemestres = parseInt(programa.numSemestres, 10);
         programa.codPrograma = parseInt(programa.codPrograma, 10);
@@ -65,7 +79,6 @@ export default function Crearprogramas() {
         fetch('https://app-gestion-aunar.herokuapp.com/programa', requestInit)
             .then(res => res.text())
             .then(res => console.log(res))
-        alert('Guardado Exitosamente');
 
         setPrograma({
             nombrePrograma: '',
@@ -79,7 +92,12 @@ export default function Crearprogramas() {
             Facultad_TipoInstitucion_PlanesAcademicos_idPlanAcademico: 1
         });
 
-        gotoScreen("/Administrador1/Programas")
+        Modal.info({
+            title: "Docente Creado con Exito",
+            onOk: () => {
+                gotoScreen("/Administrador/Programas")
+            }
+        });
     }
 
     return (
@@ -88,7 +106,7 @@ export default function Crearprogramas() {
                 <Row className="box-select-content border-radius-10 box-shadow" style={{ padding: "2%" }}>
                     <Row style={{ width: "100%", padding: "2%" }} className="d-flex justify-content-center">
                         <Col span={4}>
-                            <Button type="primary" shape="round" icon={<LeftCircleOutlined />} onClick={() => gotoScreen("/Administrador1/Programas")}>
+                            <Button type="primary" shape="round" icon={<LeftCircleOutlined />} onClick={() => gotoScreen("/Administrador/Programas")}>
                                 Salir
                             </Button>
                         </Col>
@@ -113,23 +131,23 @@ export default function Crearprogramas() {
                             </Form.Item>
 
                             <Form.Item label="Facultad" span={8} className="select-space">
-                                <select name="Facultad_idFacultad" onChange={handleChange}>
+                                <Select className="margin-left" defaultValue="Seleccione" style={{ width: 150 }} onChange={handleChangeFacultad}>
                                     {
                                         facultades ? (facultades.map((data) =>
-                                            <option value={data.idFacultad}>{data.nombreFacultad}</option>
+                                            <Select.Option value={data.idFacultad}>{data.nombreFacultad}</Select.Option>
                                         )) : null
                                     }
-                                </select>
+                                </Select>
                             </Form.Item>
 
                             <Form.Item label="Tipo Institución" span={8} className="select-space">
-                                <select name="Facultad_TipoInstitucion_idTipoInstitucion" onChange={handleChange}>
+                                <Select className="margin-left" defaultValue="Seleccione" style={{ width: 150 }} onChange={handleChangeInstitucion}>
                                     {
                                         instituciones ? (instituciones.map((data) =>
-                                            <option value={data.idTipoInstitucion}>{data.nombreInstitucion}</option>
+                                            <Select.Option value={data.idTipoInstitucion}>{data.nombreInstitucion}</Select.Option>
                                         )) : null
                                     }
-                                </select>
+                                </Select>
                             </Form.Item>
 
                             <Form.Item label="Jornada" span={8} className="select-space">

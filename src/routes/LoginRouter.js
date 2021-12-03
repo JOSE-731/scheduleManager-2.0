@@ -21,7 +21,7 @@ export default function LoginRouter() {
             <Route path="/Coordinador/">
               <CordRouter />
             </Route>
-            <Route path="/Administrador1/">
+            <Route path="/Administrador/">
               <AdministradorRouter />
             </Route>
             <Route path="/Olvidastecontraseña">
